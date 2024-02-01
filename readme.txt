@@ -9,6 +9,9 @@ install the requirements:
     pip install django
     pip install mysqlclient
 
+To open the database:
+    mysql -u Mantis -h localhost -p LMS_db
+
 create a new project:
     django-admin startproject auxilium
 
@@ -32,5 +35,3 @@ In Django settings update the database settings:
         'NAME': 'LMS_db',
     }
 }
-
-mysql -u Mantis -h localhost -p LMS_db
