@@ -1,0 +1,3 @@
+login pages:
+    logo or college pic in bg with solid colour overlay
+    and basic login form with saperate login for student and staff

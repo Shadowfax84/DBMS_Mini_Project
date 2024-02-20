@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Your LMS</title>
+    <!-- Add your CSS styling here -->
+</head>
+<body>
+    <h1>Welcome to Your Learning Management System</h1>
+    <p>Sign up as:</p>
+    <ul>
+        <li><a href="{% url 'student_signup' %}">Student</a></li>
+        <li><a href="{% url 'teacher_signup' %}">Teacher</a></li>
+    </ul>
+    <p>Already have an account? <a href="{% url 'login_page' %}">Login</a></p>
+</body>
+</html>
