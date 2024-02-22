@@ -10,7 +10,7 @@ class Dept(models.Model):
 class Course(models.Model):
     Subject_ID = models.IntegerField(primary_key=True)
     Subject_Name = models.CharField(max_length=255)
-    Sem = models.IntegerField()
+    Sem = models.CharField(max_length=255)
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
 

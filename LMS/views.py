@@ -5,7 +5,7 @@ from .models import Student, Faculty
 from .forms import StudentSignupForm, TeacherSignupForm
 from .forms import ForgotPasswordForm
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from .models import Attendance, Course, Faculty, Extra_Curricular
 
 
@@ -61,7 +61,7 @@ def student_login(request):
         if user is not None:
             login(request, user)
             # Redirect to student dashboard or desired page
-            return redirect('home')
+            return redirect('/student-dashboard/')
         else:
             # Handle invalid login credentials
             return render(request, 'student_login.html', {'error': 'Invalid username or password.'})
@@ -88,6 +88,7 @@ def teacher_login(request):
 def forgot_password(request):
     # Handle forgot password logic here
     return render(request, 'forgot_password.html', {'form': ForgotPasswordForm()})
+
 
 def student_dashboard(request):
     student = request.user.student
