@@ -2,6 +2,9 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import StudentSignupForm, TeacherSignupForm
 from .forms import ForgotPasswordForm
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Attendance, Course, Faculty, Extra_Curricular
 
 
 def landing_page(request):
@@ -79,3 +82,20 @@ def teacher_login(request):
 def forgot_password(request):
     # Handle forgot password logic here
     return render(request, 'forgot_password.html', {'form': ForgotPasswordForm()})
+
+def student_dashboard(request):
+    student = request.user.student
+    attendance = Attendance.objects.filter(USN=student)
+    courses = Course.objects.filter(Sem=student.Sem)
+    faculties = Faculty.objects.filter(Dept_ID=student.Dept_ID)
+    extracurricular_activities = Extra_Curricular.objects.filter(USN=student)
+
+    context = {
+        'student': student,
+        'attendance': attendance,
+        'courses': courses,
+        'faculties': faculties,
+        'extracurricular_activities': extracurricular_activities,
+    }
+
+    return render(request, 'student_dashboard.html', context)
