@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from .models import Student, Faculty
 from .forms import StudentSignupForm, TeacherSignupForm
 from .forms import ForgotPasswordForm
 from django.shortcuts import render
@@ -9,6 +11,10 @@ from .models import Attendance, Course, Faculty, Extra_Curricular
 
 def landing_page(request):
     return render(request, 'landing.html')
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 def student_signup(request):
@@ -55,7 +61,7 @@ def student_login(request):
         if user is not None:
             login(request, user)
             # Redirect to student dashboard or desired page
-            return redirect('home.html')
+            return redirect('home')
         else:
             # Handle invalid login credentials
             return render(request, 'student_login.html', {'error': 'Invalid username or password.'})
@@ -71,7 +77,7 @@ def teacher_login(request):
         if user is not None:
             login(request, user)
             # Redirect to teacher dashboard or desired page
-            return redirect('home.html')
+            return redirect('home')
         else:
             # Handle invalid login credentials
             return render(request, 'teacher_login.html', {'error': 'Invalid username or password.'})

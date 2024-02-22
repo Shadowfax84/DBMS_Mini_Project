@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Dept(models.Model):
@@ -14,6 +15,7 @@ class Course(models.Model):
 
 
 class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     USN = models.CharField(max_length=10, primary_key=True)
     Name = models.CharField(max_length=255)
     Sem = models.ForeignKey(
@@ -25,8 +27,12 @@ class Student(models.Model):
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
     Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.Name
+
 
 class Faculty(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     Faculty_ID = models.CharField(max_length=10, primary_key=True)
     Name = models.CharField(max_length=255)
     Qualifications = models.CharField(max_length=255)
@@ -35,6 +41,9 @@ class Faculty(models.Model):
     Email = models.EmailField(max_length=255)
     Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Name
 
 
 class Extra_Curricular(models.Model):
