@@ -6,5 +6,9 @@
 <body>
 	<h1>Welcome</h1>
 	<p>Thank you for loging in </p>
+	<form action="{% url 'logout' %}" method="post">
+		{% csrf_token %}
+		<button type="submit">Logout</button>
+	</form>
 </body>
 </html>

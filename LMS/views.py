@@ -1,12 +1,9 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
-from .models import Student, Faculty
-from .forms import StudentSignupForm, TeacherSignupForm
-from .forms import ForgotPasswordForm
-from django.shortcuts import render
-# from django.contrib.auth.decorators import login_required
-from .models import Attendance, Course, Faculty, Extra_Curricular
+from .models import Faculty, Attendance, Course, Extra_Curricular, LoginHistory
+from .forms import StudentSignupForm, TeacherSignupForm, ForgotPasswordForm
+from datetime import datetime
 
 
 def landing_page(request):
@@ -21,8 +18,9 @@ def student_signup(request):
     if request.method == 'POST':
         form = StudentSignupForm(request.POST)
         if form.is_valid():
-            form.save()
-            # Redirect to student dashboard or login page
+            user = form.save()
+            student_group = Group.objects.get(name='Students')
+            user.groups.add(student_group)
             return redirect('login_page')
     else:
         form = StudentSignupForm()
@@ -33,8 +31,9 @@ def teacher_signup(request):
     if request.method == 'POST':
         form = TeacherSignupForm(request.POST)
         if form.is_valid():
-            form.save()
-            # Redirect to teacher dashboard or login page
+            user = form.save()
+            faculty_group = Group.objects.get(name='Faculty')
+            user.groups.add(faculty_group)
             return redirect('login_page')
     else:
         form = TeacherSignupForm()
@@ -60,10 +59,11 @@ def student_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to student dashboard or desired page
+            # Create a new LoginHistory record for the logged-in user
+            LoginHistory.objects.create(
+                user=user, login_timestamp=datetime.now())
             return redirect('/student-dashboard/')
         else:
-            # Handle invalid login credentials
             return render(request, 'student_login.html', {'error': 'Invalid username or password.'})
     else:
         return render(request, 'student_login.html')
@@ -76,18 +76,29 @@ def teacher_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to teacher dashboard or desired page
+            # Create a new LoginHistory record for the logged-in user
+            LoginHistory.objects.create(
+                user=user, login_timestamp=datetime.now())
             return redirect('home')
         else:
-            # Handle invalid login credentials
             return render(request, 'teacher_login.html', {'error': 'Invalid username or password.'})
     else:
         return render(request, 'teacher_login.html')
 
 
 def forgot_password(request):
-    # Handle forgot password logic here
     return render(request, 'forgot_password.html', {'form': ForgotPasswordForm()})
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        # Update the latest LoginHistory record with the logout timestamp
+        latest_login = LoginHistory.objects.filter(
+            user=request.user).latest('login_timestamp')
+        latest_login.logout_timestamp = datetime.now()
+        latest_login.save()
+        logout(request)
+    return redirect('login_page')
 
 
 def student_dashboard(request):

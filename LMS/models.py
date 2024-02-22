@@ -77,6 +77,13 @@ class Marks(models.Model):
     Performance = models.IntegerField()
 
 
-class Login(models.Model):
-    Username = models.CharField(max_length=255, primary_key=True)
-    Password = models.CharField(max_length=255)
+class LoginHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    login_timestamp = models.DateTimeField(auto_now_add=True)
+    logout_timestamp = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-login_timestamp']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.login_timestamp}"
