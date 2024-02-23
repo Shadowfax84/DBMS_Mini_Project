@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Marks</title>
+    <script>
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+    </script>
+    <style>
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Marks</h1>
+    <form method="post" onsubmit="showPopup()">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <div id="popup" {% if popup_message %}style="display:block"{% endif %}>
+        <p>{{ popup_message }}</p>
+        <button onclick="window.location.reload();">OK</button>
+    </div>
+</body>
+</html>

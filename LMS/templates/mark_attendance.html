@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark Attendance</title>
+    <script>
+        // JavaScript function to show the pop-up window and prevent form submission
+        function showPopup(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+    </script>
+    <style>
+        /* CSS style for the pop-up window */
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mark Attendance</h1>
+    <form method="post" onsubmit="showPopup(event)"> <!-- Call the JavaScript function on form submission -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+        <p><a href="{% url 'faculty_dashboard' %}">Go back to dashboard</a></p> <!-- Link to go back to the dashboard -->
+    </form>
+    <!-- Hidden div for the pop-up window -->
+    <div id="popup">
+        <p>Attendance saved successfully!</p>
+        <button onclick="window.location.reload();">OK</button>  <!-- Button to reload the page -->
+    </div>
+</body>
+</html>

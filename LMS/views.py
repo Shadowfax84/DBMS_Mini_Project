@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
-from django.shortcuts import render, redirect
+from django.http import HttpResponseNotFound
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Faculty, Attendance, Course, Extra_Curricular, LoginHistory
-from .forms import StudentSignupForm, TeacherSignupForm, ForgotPasswordForm
+from .forms import *
 from datetime import datetime
+from django.contrib import messages
 
 
 def landing_page(request):
@@ -19,8 +21,6 @@ def student_signup(request):
         form = StudentSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            student_group = Group.objects.get(name='Students')
-            user.groups.add(student_group)
             return redirect('login_page')
     else:
         form = StudentSignupForm()
@@ -32,8 +32,6 @@ def teacher_signup(request):
         form = TeacherSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            faculty_group = Group.objects.get(name='Faculty')
-            user.groups.add(faculty_group)
             return redirect('login_page')
     else:
         form = TeacherSignupForm()
@@ -79,7 +77,7 @@ def teacher_login(request):
             # Create a new LoginHistory record for the logged-in user
             LoginHistory.objects.create(
                 user=user, login_timestamp=datetime.now())
-            return redirect('home')
+            return redirect('/faculty-dashboard/')
         else:
             return render(request, 'teacher_login.html', {'error': 'Invalid username or password.'})
     else:
@@ -102,11 +100,16 @@ def logout_view(request):
 
 
 def student_dashboard(request):
-    student = request.user.student
-    attendance = Attendance.objects.filter(USN=student)
-    courses = Course.objects.filter(Sem=student.Sem)
+    student_id = request.user.username  # Assuming username is USN
+    student = get_object_or_404(Student, USN=student_id)
+
+    sem = request.session.get('sem')  # Assuming you store semester in session
+
+    attendance = Attendance.objects.filter(USN=student_id)
+    courses = Course.objects.filter(Sem=sem)
     faculties = Faculty.objects.filter(Dept_ID=student.Dept_ID)
-    extracurricular_activities = Extra_Curricular.objects.filter(USN=student)
+    extracurricular_activities = Extra_Curricular.objects.filter(
+        USN=student_id)
 
     context = {
         'student': student,
@@ -117,3 +120,32 @@ def student_dashboard(request):
     }
 
     return render(request, 'student_dashboard.html', context)
+
+
+def faculty_dashboard(request):
+    return render(request, 'faculty_dashboard.html')
+
+
+def mark_attendance(request):
+    if request.method == 'POST':
+        form = AttendanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'mark_attendance.html', {'form': form, 'attendance_saved': True})
+    else:
+        form = AttendanceForm()
+    return render(request, 'mark_attendance.html', {'form': form, 'attendance_saved': False})
+
+
+def enter_marks(request):
+    popup_message = ''
+    if request.method == 'POST':
+        form = MarksForm(request.POST)
+        if form.is_valid():
+            form.save()
+            popup_message = 'Marks saved successfully!'
+        else:
+            popup_message = 'Form validation failed. Please check your input.'
+    else:
+        form = MarksForm()
+    return render(request, 'enter_marks.html', {'form': form, 'popup_message': popup_message})

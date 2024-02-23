@@ -6,6 +6,9 @@ class Dept(models.Model):
     Dept_ID = models.IntegerField(primary_key=True)
     Dept_Name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return str(self.Dept_ID)
+
 
 class Course(models.Model):
     Subject_ID = models.IntegerField(primary_key=True)
@@ -13,29 +16,33 @@ class Course(models.Model):
     Sem = models.CharField(max_length=255)
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.Subject_ID)
+
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     USN = models.CharField(max_length=10, primary_key=True)
     Name = models.CharField(max_length=255)
-    Sem = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name='sem_students')
-    Gender = models.CharField(max_length=6)
+    Sem = models.ForeignKey(Course, on_delete=models.CASCADE,
+                            related_name='sem_students', null=True, blank=True)
+    Gender = models.CharField(max_length=6, choices=[(
+        'male', 'Male'), ('female', 'Female'), ('other', 'Other')])
     Phone_No = models.CharField(max_length=10)
     Email = models.EmailField(max_length=255)
     Joining_Year = models.IntegerField()
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
-    Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Subject_ID = models.ManyToManyField(
+        Course, related_name='student_subjects')
 
     def __str__(self):
         return self.Name
 
 
 class Faculty(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     Faculty_ID = models.CharField(max_length=10, primary_key=True)
     Name = models.CharField(max_length=255)
-    Qualifications = models.CharField(max_length=255)
+    Qualifications = models.CharField(max_length=6, choices=[(
+        'b.e', 'B.E'), ('b.sc', 'B.Sc'), ('m.tech', 'M.Tech'), ('m.sc', 'M.Sc'), ('phd', 'PhD')])
     Papers_Published = models.IntegerField()
     Phone_No = models.CharField(max_length=10)
     Email = models.EmailField(max_length=255)
@@ -60,8 +67,8 @@ class Attendance(models.Model):
     Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
     Date = models.DateField()
     Attendance_status = models.CharField(max_length=10)
-    Behaviour_Score = models.IntegerField()
-    Attendance_Score = models.IntegerField()
+    Behaviour_Score = models.IntegerField(null=True)
+    Attendance_Score = models.IntegerField(null=True)
 
 
 class Marks(models.Model):
@@ -74,7 +81,7 @@ class Marks(models.Model):
     Seminar_Marks = models.IntegerField()
     External_Marks = models.IntegerField()
     Final_Marks = models.IntegerField()
-    Performance = models.IntegerField()
+    Performance = models.IntegerField(null=True)
 
 
 class LoginHistory(models.Model):
