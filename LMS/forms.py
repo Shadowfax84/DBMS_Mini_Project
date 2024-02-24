@@ -10,8 +10,7 @@ class StudentSignupForm(forms.ModelForm):
         widget=forms.PasswordInput, label='Confirm Password', required=True)
     subject_id = forms.ModelMultipleChoiceField(
         queryset=Course.objects.all(), widget=forms.SelectMultiple)
-    sem = forms.ModelChoiceField(
-        queryset=Course.objects.values_list('Sem', flat=True).distinct(), label='Sem')
+    sem = forms.ChoiceField(choices=Course.SEMESTER_CHOICES, label='Sem')
 
     class Meta:
         model = Student
@@ -87,10 +86,25 @@ class AttendanceForm(forms.ModelForm):
 
 
 class MarksForm(forms.ModelForm):
-    sem = forms.ModelChoiceField(
-        queryset=Course.objects.values_list('Sem', flat=True).distinct(), label='Sem')
+    sem = forms.ChoiceField(choices=Course.SEMESTER_CHOICES, label='Sem')
 
     class Meta:
         model = Marks
         fields = ['USN', 'Subject_ID', 'sem', 'Internal_Marks', 'Assignment_Marks',
                   'Seminar_Marks', 'External_Marks', 'Final_Marks', 'Performance']
+
+    def save(self, commit=True):
+        marks_instance = super().save(commit=False)
+
+        # Retrieve the selected semester value from the form
+        selected_semester = self.cleaned_data['sem']
+
+        # Get the corresponding Course instance for the selected semester
+        course_instance = Course.objects.get(Sem=selected_semester)
+
+        # Assign the Course instance to the 'Sem' field in the 'Marks' model instance
+        marks_instance.Sem = course_instance
+
+        if commit:
+            marks_instance.save()
+        return marks_instance

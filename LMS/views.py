@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
-from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Faculty, Attendance, Course, Extra_Curricular, LoginHistory
 from .forms import *
@@ -144,6 +143,8 @@ def enter_marks(request):
         if form.is_valid():
             form.save()
             popup_message = 'Marks saved successfully!'
+            return redirect('/enter-marks/')
+
         else:
             popup_message = 'Form validation failed. Please check your input.'
     else:

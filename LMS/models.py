@@ -11,9 +11,20 @@ class Dept(models.Model):
 
 
 class Course(models.Model):
+    SEMESTER_CHOICES = [
+        ('1', '1st Semester'),
+        ('2', '2nd Semester'),
+        ('3', '3rd Semester'),
+        ('4', '4th Semester'),
+        ('5', '5th Semester'),
+        ('6', '6th Semester'),
+        ('7', '7th Semester'),
+        ('8', '8th Semester'),
+    ]
+
     Subject_ID = models.IntegerField(primary_key=True)
     Subject_Name = models.CharField(max_length=255)
-    Sem = models.CharField(max_length=255)
+    Sem = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
     def __str__(self):
