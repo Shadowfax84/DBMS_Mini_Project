@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance List</title>
+</head>
+<body>
+    <h1>Attendance List</h1>
+    <ul>
+        {% for attendance in attendances %}
+            <li>
+                <strong>USN:</strong> {{ attendance.USN }} |
+                <strong>Subject ID:</strong> {{ attendance.Subject_ID }} |
+                <strong>Date:</strong> {{ attendance.Date }} |
+                <strong>Attendance Status:</strong> {{ attendance.Attendance_status }}
+                <a href="{% url 'attendance_update' attendance.pk %}">Edit</a> |
+                <a href="{% url 'attendance_delete' attendance.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
