@@ -8,7 +8,7 @@
     <h1>Faculty Dashboard</h1>
     <p>Welcome, {{ request.user.username }}!</p>  <!-- Display the username of the logged-in user -->
     <a href="{% url 'mark_attendance' %}">Mark Attendance</a>  <!-- Link to the mark attendance page -->
-    <a href="{% url 'enter_marks' %}">Enter Marks</a>
+    <a href="{% url 'attendance_list' %}">Attendance List</a>  <!-- Link to the attendance list page -->
     <form action="{% url 'logout' %}" method="post">
 		{% csrf_token %}
 		<button type="submit">Logout</button>

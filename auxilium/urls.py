@@ -31,7 +31,11 @@ urlpatterns = [
     path('teacher-signup/', views.teacher_signup, name='teacher_signup'),
     path('student-dashboard/', views.student_dashboard, name='student_dashboard'),
     path('faculty-dashboard/', views.faculty_dashboard, name='faculty_dashboard'),
-    path('mark-attendance/', mark_attendance, name='mark_attendance'),
-    path('enter-marks/', enter_marks, name='enter_marks'),
+    path('mark-attendance/', MarkAttendanceView.as_view(), name='mark_attendance'),
+    path('attendance/', AttendanceListView.as_view(), name='attendance_list'),
+    path('attendance/<int:pk>/update/',
+         AttendanceUpdateView.as_view(), name='attendance_update'),
+    path('attendance/<int:pk>/delete/',
+         AttendanceDeleteView.as_view(), name='attendance_delete'),
     path('home/', views.home, name='home'),
 ]

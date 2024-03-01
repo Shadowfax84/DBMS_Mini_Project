@@ -1,7 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Faculty, Attendance, Course, Extra_Curricular, LoginHistory
+from django.http import JsonResponse
+from django.views import View
+from django.views.generic import ListView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import *
 from .forms import *
 from datetime import datetime
 from django.contrib import messages
@@ -36,7 +41,7 @@ def teacher_signup(request):
             return redirect('login_page')
     else:
         form = TeacherSignupForm()
-         # Query the database to get dept_id values
+        # Query the database to get dept_id values
         Dept_ids = Faculty.objects.values_list('Dept_ID', flat=True).distinct()
 
     return render(request, 'teacher_signup.html', {'form': form})
@@ -130,31 +135,82 @@ def faculty_dashboard(request):
     return render(request, 'faculty_dashboard.html')
 
 
-def mark_attendance(request):
-    if request.method == 'POST':
-        print("form created")
-        form = AttendanceForm(request.POST)
-        if form.is_valid():
-            print("form valid")
-            form.save()
-            print("form Saved")
-            return render(request, 'mark_attendance.html', {'form': form})
-    else:
-        form = AttendanceForm()
-    return render(request, 'mark_attendance.html', {'form': form})
+class MarkAttendanceView(View):
+    template_name = 'mark_attendance.html'
+
+    def get(self, request):
+        # Get existing USN and Subject IDs from the database
+        usn_list = Attendance.objects.values_list('USN', flat=True).distinct()
+        subject_id_list = Attendance.objects.values_list(
+            'Subject_ID', flat=True).distinct()
+
+        context = {
+            'usn_list': usn_list,
+            'subject_id_list': subject_id_list,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        usn_id = request.POST.get('usn')
+        subject_id = request.POST.get('subjectId')
+        date_str = request.POST.get('date')
+        attendance_status = request.POST.get('attendanceStatus')
+
+        # Parse date string to datetime object
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
+
+        try:
+            # Retrieve Student object
+            student = get_object_or_404(Student, USN=usn_id)
+
+            # Create or update attendance record
+            Attendance.objects.create(
+                USN=student,
+                Subject_ID_id=subject_id,
+                Date=date,
+                Attendance_status=attendance_status
+            )
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
 
 
-def enter_marks(request):
-    popup_message = ''
-    if request.method == 'POST':
-        form = MarksForm(request.POST)
-        if form.is_valid():
-            form.save()
-            popup_message = 'Marks saved successfully!'
-            return redirect('/enter-marks/')
+class AttendanceListView(ListView):
+    model = Attendance
+    template_name = 'attendance_list.html'  # Create this template
+    context_object_name = 'attendances'
 
-        else:
-            popup_message = 'Form validation failed. Please check your input.'
-    else:
-        form = MarksForm()
-    return render(request, 'enter_marks.html', {'form': form, 'popup_message': popup_message})
+
+class AttendanceUpdateView(UpdateView):
+    model = Attendance
+    fields = ['USN', 'Subject_ID', 'Date', 'Attendance_status']
+    template_name = 'attendance_update.html'
+    success_url = reverse_lazy('attendance_list')
+
+    def form_valid(self, form):
+        # Get the instance of the Attendance object being updated
+        attendance_instance = form.save(commit=False)
+
+        # Perform any additional logic here, such as updating values
+        # For example, to update the Date field:
+        new_date = form.cleaned_data['date']
+        attendance_instance.date = new_date
+
+        # Update the Attendance_status field
+        new_attendance_status = form.cleaned_data['attendance_status']
+        attendance_instance.attendance_status = new_attendance_status
+
+        # Save the updated instance to the database
+        attendance_instance.save()
+
+        # Call the superclass's form_valid method to handle the rest of the logic
+        return super().form_valid(form)
+
+
+class AttendanceDeleteView(DeleteView):
+    model = Attendance
+    # Specify the path to the template
+    template_name = 'attendance_confirm_delete.html'
+    # Redirect to attendance list page after successful deletion
+    success_url = reverse_lazy('attendance_list')
