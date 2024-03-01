@@ -4,3 +4,7 @@ login pages:
 
     CONFORM password
     USER_ID = USN
+
+detele and edit for teacher
+Extra circular 
+Schedule 
