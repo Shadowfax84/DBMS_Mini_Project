@@ -2,14 +2,6 @@
 <html>
 <head>
     <title>Mark Attendance</title>
-    <script>
-        // JavaScript function to show the pop-up window and prevent form submission
-        function showPopup(event) {
-            event.preventDefault(); // Prevent default form submission behavior
-            var popup = document.getElementById("popup");
-            popup.style.display = "block";
-        }
-    </script>
     <style>
         /* CSS style for the pop-up window */
         #popup {
@@ -27,16 +19,28 @@
 </head>
 <body>
     <h1>Mark Attendance</h1>
-    <form method="post" onsubmit="showPopup(event)"> <!-- Call the JavaScript function on form submission -->
+    <form id="attendance-form" method="post"> <!-- Form for marking attendance -->
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-        <p><a href="{% url 'faculty_dashboard' %}">Go back to dashboard</a></p> <!-- Link to go back to the dashboard -->
+        {{ form.as_p }} <!-- Render form fields -->
+        <button id="submit-btn" type="submit">Submit</button> <!-- Submit button -->
+        <p><a href="{% url 'faculty_dashboard' %}">Go back to dashboard</a></p> <!-- Link to dashboard -->
     </form>
-    <!-- Hidden div for the pop-up window -->
-    <div id="popup">
-        <p>Attendance saved successfully!</p>
-        <button onclick="window.location.reload();">OK</button>  <!-- Button to reload the page -->
+    <div id="popup" style="display: none;"> <!-- Hidden popup div -->
+        <p>Attendance saved successfully!</p> <!-- Popup message -->
+        <button id="ok-btn">OK</button> <!-- OK button to close popup -->
     </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById("attendance-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var form = this; // Get the form element
+            fetch(form.action, { method: form.method, body: new FormData(form) }) // Send form data via fetch API
+                .then(response => response.ok && (document.getElementById("popup").style.display = "block")); // Show popup if submission successful
+        });
+
+        // Reload the page when OK button in the popup is clicked
+        document.getElementById("ok-btn").addEventListener("click", () => location.reload());
+    </script>
 </body>
 </html>

@@ -1,16 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Student Signup</title>
-    <!-- Add your CSS styling here -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SMS - Django</title>
+    <style type="text/css">
+        body {
+            color: #aa082e;
+            background-color: #b6bde7;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        .note {
+            text-align: center;
+            height: 80px;
+            background: -webkit-linear-gradient(left, #343a40, #607d8b);
+            color: #fff;
+            font-weight: bold;
+            line-height: 80px;
+        }
+
+        .form-content {
+            padding: 5%;
+            border: 1px solid #ced4da;
+            margin-bottom: 2%;
+        }
+
+        .form-control {
+            border-radius: 1.5rem;
+        }
+
+        .btnSubmit {
+            color: #ffffff;
+            text-align: left;
+            font-family: "Poppins-Medium", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        /* Add the custom styles */
+        .desktop-30,
+        .desktop-30 * {
+            box-sizing: border-box;
+        }
+
+        .desktop-30 {
+            background: #ffffff;
+            height: 1024px;
+            position: relative;
+            overflow: hidden;
+        }
+        .commonbg {
+            width: 1920px;
+            height: 1280.22px;
+            position: absolute;
+            left: calc(50% - 960px);
+            top: calc(50% - 640px);
+            filter: blur(32px);
+            object-fit: cover;
+            }
+        .frame-54 {
+            background: #fff5fb;
+            border-radius: 10px;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            }
+        .ilogo {
+            flex-shrink: 0;
+            width: 153px;
+            height: 55px;
+            position: relative;
+            object-fit: cover;
+            }
+        .frame-55 {
+            background: #fff5fb;
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: calc(50% - 309px);
+            top: calc(50% - 437px);
+            box-shadow: 2px 2px 30px 0px rgba(0, 189, 170, 0.25);
+            }
+
+
+                    /* Add the rest of your custom styles here */
+
+    </style>
 </head>
+
 <body>
-    <h1>Student Signup</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="desktop-30">
+        <img class="commonbg" src="{% static 'commonbg.png' %}" />
+        <div class="frame-54">
+            <img class="ilogo" src="{% static 'ilogo.png' %}" />
+        </div>
+        <div class="frame-55">
+
+        <!-- Student Signup Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="container register-form">
+                <div class="form">
+                    <div class="note">
+                        <p>New Admission To School</p>
+                    </div>
+
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.USN.label_tag }}
+                                    {{ form.USN }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.Name.label_tag }}
+                                    {{ form.Name }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.Gender.label_tag }}
+                                    {{ form.Gender }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.Phone_No.label_tag }}
+                                    {{ form.Phone_No }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.Email.label_tag }}
+                                    {{ form.Email }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.Joining_Year.label_tag }}
+                                    {{ form.Joining_Year }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.sem.label_tag }}
+                                    {{ form.sem }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.Dept_ID.label_tag }}
+                                    {{ form.Dept_ID }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.subject_id.label_tag }}
+                                    {{ form.subject_id }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.password.label_tag }}
+                                    {{ form.password }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.confirm_password.label_tag }}
+                                    {{ form.confirm_password }}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btnSubmit">Take Admission</button>
+                        <div class="text-center">Already have an account? <a href="student_login">Login here</a></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
 </body>
+
 </html>
