@@ -213,41 +213,22 @@
   font-weight: 400;
   position: relative;
 }
-.frame-26 {
+.login {
   background: #8c4a6f;
   border-radius: 6px;
-  padding: 12px 32px 12px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-.login {
+  padding: 12px 32px;
   color: #ffffff;
-  text-align: left;
   font-family: "Poppins-Medium", sans-serif;
   font-size: 20px;
   font-weight: 500;
-  position: relative;
+  border: none;
+  cursor: pointer;
 }
-.don-t-have-an-account-sign-up {
-  color: #2e091f;
-  text-align: left;
-  font-family: "-", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
+
+.login:hover {
+  background: #6f3450;
 }
-.don-t-have-an-account-sign-up-span {
-  color: #2e091f;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-}
+
 .don-t-have-an-account-sign-up-span2 {
   color: #2e091f;
   font-family: "Poppins-Medium", sans-serif;

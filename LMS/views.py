@@ -78,19 +78,28 @@ def student_login(request):
 
 def teacher_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        # Retrieve data from the form
+        faculty_id = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Check if the credentials are valid
+        user = authenticate(username=faculty_id, password=password)
+
         if user is not None:
+            # Login the user
             login(request, user)
             # Create a new LoginHistory record for the logged-in user
             LoginHistory.objects.create(
                 user=user, login_timestamp=datetime.now())
+            # Redirect to a different page after successful login
             return redirect('/faculty-dashboard/')
         else:
-            return render(request, 'teacher_login.html', {'error': 'Invalid username or password.'})
-    else:
-        return render(request, 'teacher_login.html')
+            # Authentication failed, display an error message or handle it accordingly
+            error_message = "Invalid faculty ID or password."
+            return render(request, 'teacher_login.html', {'error_message': error_message})
+
+    # If the request method is GET, render the login page template
+    return render(request, 'teacher_login.html')
 
 
 def forgot_password(request):
