@@ -1,22 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Teacher Login</title>
+    <title>teacher Signup </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'teacherlogin.css' %}">
+
     <!-- Add your CSS styling here -->
 </head>
 <body>
-    <h1>Teacher Login</h1>
-    {% if error %}
-    <p>{{ error }}</p>
-    {% endif %}
-    <form method="post">
+    <form method="POST">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Username" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-    </form>
-    <!-- Forgot Password and Reset Password links -->
-    <p>Forgot your password? <a href="{% url 'forgot_password' %}">Reset it here</a></p>
+    <div class="desktop-34">
+    <img class="commonbg" src="{% static 'commonbg.png' %}" />
+    <div class="frame-54">
+      <img class="ilogo" src="{% static 'ilogo.png' %}" />
+    </div>
+    <div class="frame-29">
+      <div class="frame-55">
+      </div>
+      <div class="frame-58">
+        <div class="frame-27">
+          <div class="faculty-login">Faculty Login</div>
+        </div>
+        <div class="frame-282">
+          <div class="frame-18">
+            <div class="frame-38">
+              <div class="frame-35">
+                <div class="frame-24">
+                  <div class="faculty-id">Faculty ID:</div>
+                  <input type="text" class="frame-412" placeholder="Enter Faculty Id" />
+                </div>
+              </div>
+              <div class="frame-36">
+                <div class="frame-24">
+                  <div class="password">Password:</div>
+                  <input type="password" class="frame-412" placeholder="Enter Password" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-26">
+            <button type="submit" class="login">Login</button>
+          </div>
+        </div>
+        <div class="don-t-have-an-account-sign-up">
+          <span>
+            <span class="don-t-have-an-account-sign-up-span">
+              Don’t have an account?
+            </span>
+            <span class="don-t-have-an-account-sign-up-span2">Sign Up</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+</div>
+</div>
+</div>
+</form>
 </body>
+
 </html>
+  

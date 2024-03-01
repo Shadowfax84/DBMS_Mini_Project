@@ -5,6 +5,8 @@ from .models import Faculty, Attendance, Course, Extra_Curricular, LoginHistory
 from .forms import *
 from datetime import datetime
 from django.contrib import messages
+from .forms import AttendanceForm
+from .models import *
 
 
 def landing_page(request):
@@ -34,6 +36,9 @@ def teacher_signup(request):
             return redirect('login_page')
     else:
         form = TeacherSignupForm()
+         # Query the database to get dept_id values
+        Dept_ids = Faculty.objects.values_list('Dept_ID', flat=True).distinct()
+
     return render(request, 'teacher_signup.html', {'form': form})
 
 
@@ -127,13 +132,16 @@ def faculty_dashboard(request):
 
 def mark_attendance(request):
     if request.method == 'POST':
+        print("form created")
         form = AttendanceForm(request.POST)
         if form.is_valid():
+            print("form valid")
             form.save()
-            return render(request, 'mark_attendance.html', {'form': form, 'attendance_saved': True})
+            print("form Saved")
+            return render(request, 'mark_attendance.html', {'form': form})
     else:
         form = AttendanceForm()
-    return render(request, 'mark_attendance.html', {'form': form, 'attendance_saved': False})
+    return render(request, 'mark_attendance.html', {'form': form})
 
 
 def enter_marks(request):
