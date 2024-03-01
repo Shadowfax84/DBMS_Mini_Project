@@ -12,7 +12,7 @@ from datetime import datetime
 from django.contrib import messages
 from .forms import AttendanceForm
 from .models import *
-
+from django.contrib.auth.decorators import login_required
 
 def landing_page(request):
     return render(request, 'landing.html')
@@ -39,6 +39,9 @@ def teacher_signup(request):
         if form.is_valid():
             user = form.save()
             return redirect('login_page')
+        if request.user.is_authenticated:
+        # If the user is already authenticated, redirect to the login page
+            return redirect('/login_page/')
     else:
         form = TeacherSignupForm()
         # Query the database to get dept_id values

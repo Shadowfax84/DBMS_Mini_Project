@@ -413,7 +413,7 @@
   position: relative;
   overflow: hidden;
 }
-.submit {
+.sign_up {
   color: #ffffff;
   text-align: left;
   font-family: "Poppins-Medium", sans-serif;
@@ -441,4 +441,12 @@
   font-size: 18px;
   font-weight: 500;
   text-decoration: underline;
+}
+.dept-id {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
 }
