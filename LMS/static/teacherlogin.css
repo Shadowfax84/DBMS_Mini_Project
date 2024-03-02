@@ -125,7 +125,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.faculty-login {
+.faculty-login, .student-login {
   color: #2e091f;
   text-align: left;
   font-family: "Poppins-Medium", sans-serif;

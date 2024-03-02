@@ -1,50 +1,257 @@
-/* studentlogin.css */
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+.desktop-34,
+.desktop-34 * {
+  box-sizing: border-box;
 }
-
-h1 {
-    color: #333;
+.desktop-34 {
+  background: #ffffff;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
 }
-
-form {
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+.commonbg {
+  width: 1920px;
+  height: 1280.22px;
+  position: absolute;
+  left: calc(50% - 960px);
+  top: calc(50% - 640px);
+  filter: blur(32px);
+  object-fit: cover;
 }
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
+.frame-54 {
+  background: #fff5fb;
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }
-
-button {
-    background-color: #02054E;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.ilogo {
+  flex-shrink: 0;
+  width: 153px;
+  height: 55px;
+  position: relative;
+  object-fit: cover;
 }
-
-button:hover {
-    background-color: #004080;
+.frame-29 {
+  background: #fff5fb;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: calc(50% - 178px);
+  top: calc(50% - 272px);
+  box-shadow: 2px 2px 30px 0px rgba(0, 189, 170, 0.25);
 }
-
-p {
-    color: #888;
+.frame-55 {
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
 }
-
-a {
-    color: #02054E;
+.frame-28 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.select-role {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+}
+.frame-41 {
+  border-radius: 6px;
+  border-style: solid;
+  border-color: #955c7e;
+  border-width: 1px;
+  flex-shrink: 0;
+  width: 104px;
+  height: 28px;
+  position: relative;
+}
+.keyboard-arrow-down {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 6px;
+  top: calc(50% - 12.22px);
+  overflow: visible;
+}
+.student {
+  color: #955c7e;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: absolute;
+  left: 7px;
+  top: calc(50% - 10px);
+}
+.frame-58 {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-27 {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.student-login {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Medium", sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  position: relative;
+}
+.frame-282 {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-18 {
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-38 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-35 {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-24 {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.usn {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
+}
+.frame-412 {
+  border-radius: 6px;
+  border-style: solid;
+  border-color: #955c7e;
+  border-width: 1px;
+  flex-shrink: 0;
+  width: 260px;
+  height: 36px;
+  position: relative;
+}
+.frame-36 {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.password {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
+}
+.frame-26 {
+  background: #8c4a6f;
+  border-radius: 6px;
+  padding: 12px 32px 12px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.login {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Poppins-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.don-t-have-an-account-sign-up {
+  color: #2e091f;
+  text-align: left;
+  font-family: "-", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
+}
+.don-t-have-an-account-sign-up-span {
+  color: #2e091f;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+.don-t-have-an-account-sign-up-span2 {
+  color: #2e091f;
+  font-family: "Poppins-Medium", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: underline;
 }
