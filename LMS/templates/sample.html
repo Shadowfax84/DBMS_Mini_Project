@@ -132,3 +132,62 @@
     
 </body>
 </html>
+
+
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+>  
+{% block content %}
+    <header>
+        <h1>Welcome, {{ student.Name }}!</h1>
+    </header>
+
+    <section>
+        <h2>Your Dashboard</h2>
+
+        <div>
+            <h3>Attendance</h3>
+            <!-- Display attendance information -->
+            {% for attendance_record in attendance %}
+                {{ attendance_record.Subject_ID.Subject_Name }} - {{ attendance_record.Attendance_status }}<br>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3>Courses</h3>
+            <!-- Display enrolled courses -->
+            {% for course in courses %}
+                {{ course.Subject_Name }} - Semester {{ course.Sem }}<br>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3>Faculties</h3>
+            <!-- Display faculties information -->
+            {% for faculty in faculties %}
+                {{ faculty.Name }} - {{ faculty.Qualifications }}<br>
+            {% endfor %}
+        </div>
+
+    
+
+        <div>
+            <h3>Extracurricular Activities</h3>
+            <!-- Display extracurricular activities information -->
+            {% for activity in extracurricular_activities %}
+                {{ activity.Event_Name }} - {{ activity.Extra_Curricular_Score }}<br>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+</html>
