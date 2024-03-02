@@ -14,6 +14,7 @@ from .forms import AttendanceForm
 from .models import *
 from django.contrib.auth.decorators import login_required
 
+
 def landing_page(request):
     return render(request, 'landing.html')
 
@@ -40,7 +41,7 @@ def teacher_signup(request):
             user = form.save()
             return redirect('login_page')
         if request.user.is_authenticated:
-        # If the user is already authenticated, redirect to the login page
+            # If the user is already authenticated, redirect to the login page
             return redirect('/login_page/')
     else:
         form = TeacherSignupForm()
@@ -64,9 +65,12 @@ def login_page(request):
 
 def student_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        usn = request.POST.get('usn')
+        password = request.POST.get('password')
+
+        # Authenticate the user
+        user = authenticate(request, username=usn, password=password)
+
         if user is not None:
             login(request, user)
             # Create a new LoginHistory record for the logged-in user
@@ -74,9 +78,10 @@ def student_login(request):
                 user=user, login_timestamp=datetime.now())
             return redirect('/student-dashboard/')
         else:
-            return render(request, 'student_login.html', {'error': 'Invalid username or password.'})
-    else:
-        return render(request, 'student_login.html')
+            # Authentication failed
+            return render(request, 'student_login.html', {'error_message': 'Invalid USN or password'})
+
+    return render(request, 'student_login.html')
 
 
 def teacher_login(request):

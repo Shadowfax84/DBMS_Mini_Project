@@ -1,63 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Student Signup </title>
+    <title>Student Login</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'studentlogin.css' %}">
-
-    <!-- Add your CSS styling here -->
 </head>
 <body>
-    <form method="POST">
+    <form method="POST" action="{% url 'student_login' %}">
         {% csrf_token %}
-    <div class="desktop-34">
-    <img class="commonbg" src="{% static 'commonbg.png' %}" />
-    <div class="frame-54">
-      <img class="ilogo" src="{% static 'ilogo.png' %}" />
-    </div>
-    <div class="frame-29">
-      <div class="frame-55">
-      </div>
-      <div class="frame-58">
-        <div class="frame-27">
-          <div class="student-login">Student Login</div>
-        </div>
-        <div class="frame-282">
-          <div class="frame-18">
-            <div class="frame-38">
-              <div class="frame-35">
-                <div class="frame-24">
-                  <div class="usn">USN:</div>
-                  <input type="text" class="frame-412" placeholder="Enter Faculty Id" />
-                </div>
-              </div>
-              <div class="frame-36">
-                <div class="frame-24">
-                  <div class="password">Password:</div>
-                  <input type="password" class="frame-412" placeholder="Enter Password" />
-                </div>
-              </div>
+        <div class="desktop-34">
+            <img class="commonbg" src="{% static 'commonbg.png' %}" />
+            <div class="frame-54">
+                <img class="ilogo" src="{% static 'ilogo.png' %}" />
             </div>
-          </div>
-          <div class="frame-26">
-            <button type="submit" class="login">Login</button>
-          </div>
+            <div class="frame-29">
+                <div class="frame-55"></div>
+                <div class="frame-58">
+                    <div class="frame-27">
+                        <div class="student-login">Student Login</div>
+                    </div>
+                    <div class="frame-282">
+                        <div class="frame-18">
+                            <div class="frame-38">
+                                <div class="frame-35">
+                                    <div class="frame-24">
+                                        <div class="usn">USN:</div>
+                                        <input type="text" class="frame-412" placeholder="Enter USN" name="usn" />
+                                    </div>
+                                </div>
+                                <div class="frame-36">
+                                    <div class="frame-24">
+                                        <div class="password">Password:</div>
+                                        <input type="password" class="frame-412" placeholder="Enter Password" name="password" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frame-26">
+                            <button type="submit" class="login">Login</button>
+                        </div>
+                    </div>
+                    <div class="don-t-have-an-account-sign-up">
+                      <span class="don-t-have-an-account-sign-up-span">
+                          Don’t have an account?
+                          <a href="{% url 'student_signup' %}" class="don-t-have-an-account-sign-up-span2">Sign Up</a>
+                      </span>
+                  </div>
+                </div>
+            </div>
         </div>
-        <div class="don-t-have-an-account-sign-up">
-          <span>
-            <span class="don-t-have-an-account-sign-up-span">
-              Don’t have an account?
-            </span>
-            <span class="don-t-have-an-account-sign-up-span2">Sign Up</span>
-          </span>
-        </div>
-      </div>
-    </div>
-    </div>    
     </form>
 </body>
-
 </html>
-  
