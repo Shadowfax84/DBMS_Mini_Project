@@ -9,7 +9,6 @@
 
 </head>
 <body>
-    {% block content %}
     <div class="desktop-36">
         <div class="frame-43">
           <div class="frame-44">
@@ -64,8 +63,9 @@
                 fill="#955C7E"/>             
             </svg>
           </div>
-          <img class="ilogo" src="{% 'ilogo.png' %}" />
+          <img class="ilogo" src="{% static 'ilogo.png' %}" />
         </div>
+        {% block content %}
         <header>
             <h1>Welcome, {{ student.Name }}!</h1>
         </header>
@@ -75,7 +75,8 @@
         <div class="frame-45">
           <div class="frame-46">
             <div class="frame-47">
-              <div class="dashboard">Dashboard</div>
+              <div class="dashboard" onclick="showSection('dashboard-section')">Dashboard</div>
+            <div class="section-container hidden" id="dashboard-section"></div>
             </div>
             <div class="frame-48">
               <div class="grades">Grades</div>
@@ -93,10 +94,11 @@
               {% endfor %}
             </div>
             <div class="frame-52">
-              <div class="attendance">Attendance</div>
-              {% for attendance_record in attendance %}
-                  {{ attendance_record.Subject_ID.Subject_Name }} - {{ attendance_record.Attendance_status }}<br>
-              {% endfor %}
+                <div class="attendance" onclick="showSection('attendance-section')">Attendance</div>
+                <div class="section-container hidden" id="attendance-section"></div>
+                {% for attendance_record in attendance %}
+                    {{ attendance_record.Subject_ID.Subject_Name }} - {{ attendance_record.Attendance_status }}<br>
+                {% endfor %}
             </div>
             <div class="frame-53">
               <div class="extra-curricular">Extra Curricular</div>
@@ -106,29 +108,25 @@
             </div>
           </div>
           <div class="frame-502">
-            <svg
-              class="logout"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M20.4334 21.7C20.1889 21.4111 20.0667 21.0831 20.0667 20.716C20.0667 20.3498 20.1889 20.0444 20.4334 19.8L22.9001 17.3333H13.3334C12.9556 17.3333 12.6392 17.2053 12.3841 16.9493C12.1281 16.6942 12.0001 16.3778 12.0001 16C12.0001 15.6222 12.1281 15.3053 12.3841 15.0493C12.6392 14.7942 12.9556 14.6667 13.3334 14.6667H22.9001L20.4334 12.2C20.1667 11.9333 20.0334 11.6169 20.0334 11.2507C20.0334 10.8836 20.1667 10.5667 20.4334 10.3C20.6778 10.0333 20.9836 9.9 21.3507 9.9C21.7169 9.9 22.0223 10.0222 22.2667 10.2667L27.0667 15.0667C27.2001 15.2 27.2947 15.3444 27.3507 15.5C27.4058 15.6556 27.4334 15.8222 27.4334 16C27.4334 16.1778 27.4058 16.3444 27.3507 16.5C27.2947 16.6556 27.2001 16.8 27.0667 16.9333L22.2667 21.7333C21.9778 22.0222 21.6614 22.1498 21.3174 22.116C20.9725 22.0831 20.6778 21.9444 20.4334 21.7ZM6.66673 28C5.93339 28 5.30539 27.7391 4.78273 27.2173C4.26095 26.6947 4.00006 26.0667 4.00006 25.3333V6.66667C4.00006 5.93333 4.26095 5.30533 4.78273 4.78267C5.30539 4.26089 5.93339 4 6.66673 4H14.6667C15.0445 4 15.3614 4.12756 15.6174 4.38267C15.8725 4.63867 16.0001 4.95556 16.0001 5.33333C16.0001 5.71111 15.8725 6.02756 15.6174 6.28267C15.3614 6.53867 15.0445 6.66667 14.6667 6.66667H6.66673V25.3333H14.6667C15.0445 25.3333 15.3614 25.4613 15.6174 25.7173C15.8725 25.9724 16.0001 26.2889 16.0001 26.6667C16.0001 27.0444 15.8725 27.3609 15.6174 27.616C15.3614 27.872 15.0445 28 14.6667 28H6.66673Z"
-                fill="white"
-              />
-            </svg>
-            <div class="logout2">Logout</div>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout2">Logout</button>
+            </form>            
           </div>
         </div>
     </div>
     </section>
     {% endblock %}
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    
+    <script>
+    function showSection(sectionId) {
+        console.log(`Showing section: ${sectionId}`);
+        const sections = document.querySelectorAll('.section-container');
+        sections.forEach(section => {
+            section.classList.add('hidden');
+        });
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.remove('hidden');
+    }
+    </script>
 </body>
 </html>
