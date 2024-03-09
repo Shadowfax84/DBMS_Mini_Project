@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
@@ -231,3 +232,13 @@ class AttendanceDeleteView(DeleteView):
     template_name = 'attendance_confirm_delete.html'
     # Redirect to attendance list page after successful deletion
     success_url = reverse_lazy('attendance_list')
+
+
+def user_courses(request):
+    user_subjects = Course.objects.filter(user=request.user)
+    print(user_subjects)
+
+    context = {
+        'user_subjects': user_subjects
+    }
+    return render(request, 'student_courses.html', context)
