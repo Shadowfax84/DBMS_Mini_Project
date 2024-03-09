@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"> {% load static %}
+    <link rel="stylesheet" href="{% static 'studentdashboard.css' %}">
+</head>
+
+<body>
+    <div class="desktop-36">
+        <div class="frame-43">
+            <div class="frame-44">
+                <img class="ilogo" alt="Logo" src="{% static 'ilogo.png' %}" />
+            </div>
+            {% block content %} {% if student %}
+
+            <h1>Welcome, {{ student.Name }}!</h1>
+            <section>
+                <h2>Your Dashboard</h2>
+                <div class="frame-45">
+                    <div class="frame-46">
+                        <div class="frame-47">
+                            <div class="dashboard">Dashboard</div>
+                            <div class="section-container hidden" id="dashboard-section"></div>
+                        </div>
+                        <div class="frame-48">
+                            <div class="grades">Grades</div>
+                        </div>
+                        <div class="frame-49">
+                            <div class="schedule">Schedule</div>
+                        </div>
+                        <div class="frame-50">
+                            <div id="courses" div class="hidden"></div>
+                            <button onclick="showContent('courses')">Courses</button>
+                        </div>
+                        <div class="frame-51">
+                            <div id="faculties" div class="hidden"></div>
+                            <button onclick="showContent('faculties')">Faculties</button>
+                            {% for faculty in faculties %}
+                            <li>{{ faculty.Name }} - {{ faculty.Qualifications }}</li>
+                            <br> {% endfor %}
+                        </div>
+                        <div class="frame-52">
+                            <div id="attendance" div class="hidden"></div>
+                            <button onclick="showContent('attendance')">Attendance</button>
+                            <ul>
+                                {% for attendance_record in attendance %}
+                                <li>{{ attendance_record.Subject_ID.Subject_Name }} - {{ attrndance_record.Percentage }}%</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="frame-53">
+                            <div id="extra-curricular" div class="hidden"></div>
+                            <button onclick="showContent('extracurricular')">Extracurricular Activities</button></div>
+                            {% for activity in extracurricular_activities %} {{ activity.Event_Name }} - {{ activity.Extra_Curricular_Score }}
+                            <br> {% endfor %}
+                        </div>
+                    </div>
+                    <div class="frame-502">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="logout2">Logout</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        </section>
+        {% endif %} {% endblock %}
+
+        <!-- JavaScript Functionality -->
+        <script>
+            function showContent(option) {
+                  const allContent = document.querySelectorAll('.content');
+                  allContent.forEach(content => {
+                      content.classList.add('hidden');
+                  });
+        
+                  document.getElementById(option).classList.remove('hidden');
+              }
+        </script>
+</body>
+
+</html>

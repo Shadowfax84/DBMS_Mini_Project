@@ -7,6 +7,7 @@
   height: 200vh;
   position: relative;
   overflow: hidden;
+  z-index: 999;
 }
 .frame-43 {
   background: #fff5fb;
@@ -16,6 +17,7 @@
   left: 0px;
   top: 0px;
   overflow: hidden;
+  z-index: 1;
 }
 .frame-44 {
   display: flex;
@@ -26,6 +28,12 @@
   position: absolute;
   right: 30px;
   top: calc(50% - 12px);
+  
+}
+body {
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 .search {
   flex-shrink: 0;
@@ -49,12 +57,13 @@
   overflow: visible;
 }
 .ilogo {
-  width: 80%px;
-  height: 60.5;
+  width: 80%;
+  height: 60.5px;
   position: absolute;
   left: 10px;
   top: 10px;
   object-fit: cover;
+  z-index: 3; 
 }
 .frame-45 {
   background: #1f0615;
@@ -64,6 +73,7 @@
   left: 0px;
   top: 84px;
   overflow: hidden;
+  z-index: 1;
 }
 .frame-46 {
   display: flex;
