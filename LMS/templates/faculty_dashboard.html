@@ -237,7 +237,7 @@
             <h1>Welcome, {{ faculty.Name }}!</h1>
             {%include 'faculty_dashboardcards.html'%}
                 <div class="user-details">
-                    {% if user.gender == "Male" %}
+                    {% if faculty.gender == "Male" %}
                         <!-- Male user icon -->
                         <svg class="user-image" xmlns="http://www.w3.org/2000/svg" 
                             width="100" 
@@ -264,8 +264,7 @@
                     <div>{{ user.year_of_joining }}</div> <!-- Assuming 'year_of_joining' is a field in your user model -->
                     <div>{{ user.mobile }}</div> <!-- Assuming 'mobile' is a field in your user model -->
                     <div>{{ user.email }}</div> <!-- Assuming 'email' is a field in your user model -->
-                    <a href="{% url 'mark_attendance' %}">Mark Attendance</a>  <!-- Link to the mark attendance page -->
-                    <a href="{% url 'attendance_list' %}">Attendance List</a>  <!-- Link to the attendance list page -->
+                    
                 </div>
             </div>
         </div>

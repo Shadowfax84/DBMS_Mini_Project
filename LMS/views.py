@@ -154,14 +154,13 @@ def faculty_dashboard(request):
     faculty = get_object_or_404(Faculty, Faculty_ID=faculty_id)
     
 
-    
     context = {
         'faculty': faculty,
         
        
     }
 
-    return render(request, 'faculty_dashboard.html')
+    return render(request, 'faculty_dashboard.html', context)
 
 
 class MarkAttendanceView(View):
