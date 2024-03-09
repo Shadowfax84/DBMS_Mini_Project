@@ -152,12 +152,13 @@ def student_dashboard(request):
 def faculty_dashboard(request):
     faculty_id = request.user.username  # Assuming username is Faculty_ID
     faculty = get_object_or_404(Faculty, Faculty_ID=faculty_id)
+    
 
-    courses_taught = Course.objects.filter(Faculty_ID=faculty)
-
+    
     context = {
         'faculty': faculty,
-        'courses_taught': courses_taught,
+        
+       
     }
 
     return render(request, 'faculty_dashboard.html')
