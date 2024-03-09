@@ -1,84 +1,274 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="styles.css"> {% load static %}
-    <link rel="stylesheet" href="{% static 'studentdashboard.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    
+    {% load static %}
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .Container {
+            display: flex;
+        }
+        .Frame43 {
+            width: 100%;
+            height: 84px;
+            background: #FFF5FB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            box-sizing: border-box;
+        }
+
+        .Image122 {
+            width: 165px;
+            height: auto;
+        }
+
+        .Frame44 {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .Search,
+        .NotificationsNone,
+        .AccountCircle {
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+
+        .Vector {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+        }
+
+        .Vector::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: white;
+        }
+
+        .Vector:first-child::before {
+            width: 17.05px;
+            height: 17.06px;
+            top: 3px;
+            left: 3px;
+        }
+
+        .Vector:last-child::before {
+            width: 15.17px;
+            height: 19.50px;
+            top: 2.50px;
+            left: 4.41px;
+        }
+
+        /* Menu Styles */
+        .Frame45 {
+            width: 360px;
+            height: repeat(auto-fill, 100px);
+            padding: 50px;
+            background: #1F0615;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 32px;
+            flex: 0 0 250px;
+        }
+
+        .Frame46 {
+            align-self: stretch;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 32px;
+            display: flex;
+        }
+
+        .Frame47,
+        .Frame48,
+        .Frame49,
+        .Frame50,
+        .Frame51,
+        .Frame52,
+        .Frame53 {
+            padding: 10px 20px;
+            border-radius: 6px;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 10px;
+            display: flex;
+        }
+
+        .Frame47,
+        .Frame48,
+        .Frame49,
+        .Frame50,
+        .Frame51,
+        .Frame52,
+        .Frame53 {
+            color: white;
+            font-size: 24px;
+            font-family: Poppins;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+        .dashboard {
+            flex: 1; /* Take remaining space */
+            width: auto;
+            height: auto;
+            background-color:  white;
+            font-display: flex;
+            justify-content: center;
+        }
+        .user-details {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .user-image {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Adjust size as needed */
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="desktop-36">
-        <div class="frame-43">
-            <div class="frame-44">
-                <img class="ilogo" alt="Logo" src="{% static 'ilogo.png' %}" />
-            </div>
-            {% block content %} {% if student %}
-
-            <h1>Welcome, {{ student.Name }}!</h1>
-            <section>
-                <h2>Your Dashboard</h2>
-                <div class="frame-45">
-                    <div class="frame-46">
-                        <div class="frame-47">
-                            <div class="dashboard">Dashboard</div>
-                            <div class="section-container hidden" id="dashboard-section"></div>
-                        </div>
-                        <div class="frame-48">
-                            <div class="grades">Grades</div>
-                        </div>
-                        <div class="frame-49">
-                            <div class="schedule">Schedule</div>
-                        </div>
-                        <div class="frame-50">
-                            <div id="courses" div class="hidden"></div>
-                            <button onclick="showContent('courses')">Courses</button>
-                        </div>
-                        <div class="frame-51">
-                            <div id="faculties" div class="hidden"></div>
-                            <button onclick="showContent('faculties')">Faculties</button>
-                            {% for faculty in faculties %}
-                            <li>{{ faculty.Name }} - {{ faculty.Qualifications }}</li>
-                            <br> {% endfor %}
-                        </div>
-                        <div class="frame-52">
-                            <div id="attendance" div class="hidden"></div>
-                            <button onclick="showContent('attendance')">Attendance</button>
-                            <ul>
-                                {% for attendance_record in attendance %}
-                                <li>{{ attendance_record.Subject_ID.Subject_Name }} - {{ attrndance_record.Percentage }}%</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="frame-53">
-                            <div id="extra-curricular" div class="hidden"></div>
-                            <button onclick="showContent('extracurricular')">Extracurricular Activities</button></div>
-                            {% for activity in extracurricular_activities %} {{ activity.Event_Name }} - {{ activity.Extra_Curricular_Score }}
-                            <br> {% endfor %}
-                        </div>
-                    </div>
-                    <div class="frame-502">
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="logout2">Logout</button>
-                        </form>
-                    </div>
+    <form>
+        {% csrf_token %}
+        <div class="Frame43">
+            <img class="ilogo" src="{% static 'ilogo.png' %}" />
+            <div class="Frame44">
+                <div class="Search">
+                    <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">            
+                    <g clip-path="url(#clip0_99_4367)">
+                        <path
+                        d="M15.5 13.9999H14.71L14.43 13.7299C15.63 12.3299 16.25 10.4199 15.91 8.38989C15.44 5.60989 13.12 3.38989 10.32 3.04989C6.09001 2.52989 2.53002 6.08989 3.05002 10.3199C3.39002 13.1199 5.61002 15.4399 8.39002 15.9099C10.42 16.2499 12.33 15.6299 13.73 14.4299L14 14.7099V15.4999L18.25 19.7499C18.66 20.1599 19.33 20.1599 19.74 19.7499C20.15 19.3399 20.15 18.6699 19.74 18.2599L15.5 13.9999ZM9.50002 13.9999C7.01002 13.9999 5.00002 11.9899 5.00002 9.49989C5.00002 7.00989 7.01002 4.99989 9.50002 4.99989C11.99 4.99989 14 7.00989 14 9.49989C14 11.9899 11.99 13.9999 9.50002 13.9999Z"
+                        fill="#955C7E"
+                        />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_99_4367">
+                        <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                    </defs>
+                    </svg>
                 </div>
+                <div class="NotificationsNone">
+                    <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    
+                    <g clip-path="url(#clip0_99_4370)">
+                        <path
+                        d="M19.2901 17.29L18.0001 16V11C18.0001 7.93 16.3601 5.36 13.5001 4.68V4C13.5001 3.17 12.8301 2.5 12.0001 2.5C11.1701 2.5 10.5001 3.17 10.5001 4V4.68C7.63005 5.36 6.00005 7.92 6.00005 11V16L4.71005 17.29C4.08005 17.92 4.52005 19 5.41005 19H18.5801C19.4801 19 19.9201 17.92 19.2901 17.29ZM16.0001 17H8.00005V11C8.00005 8.52 9.51005 6.5 12.0001 6.5C14.4901 6.5 16.0001 8.52 16.0001 11V17ZM12.0001 22C13.1001 22 14.0001 21.1 14.0001 20H10.0001C10.0001 21.1 10.8901 22 12.0001 22Z"
+                        fill="#955C7E"/>            
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_99_4370">
+                        <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                    </defs>
+                    </svg>
+                </div>
+                <div class="AccountCircle">
+                    <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path
+                        d="M5.85 17.1C6.7 16.45 7.65 15.9373 8.7 15.562C9.75 15.1873 10.85 15 12 15C13.15 15 14.25 15.1873 15.3 15.562C16.35 15.9373 17.3 16.45 18.15 17.1C18.7333 16.4167 19.1877 15.6417 19.513 14.775C19.8377 13.9083 20 12.9833 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 12.9833 4.16267 13.9083 4.488 14.775C4.81267 15.6417 5.26667 16.4167 5.85 17.1ZM12 13C11.0167 13 10.1873 12.6627 9.512 11.988C8.83733 11.3127 8.5 10.4833 8.5 9.5C8.5 8.51667 8.83733 7.68733 9.512 7.012C10.1873 6.33733 11.0167 6 12 6C12.9833 6 13.8127 6.33733 14.488 7.012C15.1627 7.68733 15.5 8.51667 15.5 9.5C15.5 10.4833 15.1627 11.3127 14.488 11.988C13.8127 12.6627 12.9833 13 12 13ZM12 22C10.6167 22 9.31667 21.7373 8.1 21.212C6.88333 20.6873 5.825 19.975 4.925 19.075C4.025 18.175 3.31267 17.1167 2.788 15.9C2.26267 14.6833 2 13.3833 2 12C2 10.6167 2.26267 9.31667 2.788 8.1C3.31267 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.31233 8.1 2.787C9.31667 2.26233 10.6167 2 12 2C13.3833 2 14.6833 2.26233 15.9 2.787C17.1167 3.31233 18.175 4.025 19.075 4.925C19.975 5.825 20.6873 6.88333 21.212 8.1C21.7373 9.31667 22 10.6167 22 12C22 13.3833 21.7373 14.6833 21.212 15.9C20.6873 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6873 15.9 21.212C14.6833 21.7373 13.3833 22 12 22ZM12 20C12.8833 20 13.7167 19.871 14.5 19.613C15.2833 19.3543 16 18.9833 16.65 18.5C16 18.0167 15.2833 17.6457 14.5 17.387C13.7167 17.129 12.8833 17 12 17C11.1167 17 10.2833 17.129 9.5 17.387C8.71667 17.6457 8 18.0167 7.35 18.5C8 18.9833 8.71667 19.3543 9.5 19.613C10.2833 19.871 11.1167 20 12 20ZM12 11C12.4333 11 12.7917 10.8583 13.075 10.575C13.3583 10.2917 13.5 9.93333 13.5 9.5C13.5 9.06667 13.3583 8.70833 13.075 8.425C12.7917 8.14167 12.4333 8 12 8C11.5667 8 11.2083 8.14167 10.925 8.425C10.6417 8.70833 10.5 9.06667 10.5 9.5C10.5 9.93333 10.6417 10.2917 10.925 10.575C11.2083 10.8583 11.5667 11 12 11Z"
+                        fill="#955C7E"/>             
+                    </svg>
+                </div>
+            </div>
         </div>
-        </section>
-        {% endif %} {% endblock %}
-
-        <!-- JavaScript Functionality -->
-        <script>
-            function showContent(option) {
-                  const allContent = document.querySelectorAll('.content');
-                  allContent.forEach(content => {
-                      content.classList.add('hidden');
-                  });
-        
-                  document.getElementById(option).classList.remove('hidden');
-              }
-        </script>
+        <div class="Container">
+            <div class="Frame45">
+                <div class="Frame46">
+                <div class="Frame47">Dashboard</a></div>
+                <div class="Frame48">Courses</a></div>
+                <div class="Frame49">Marks</a></div>
+                <div class="Frame50">Attendance</a></div>
+                <div class="Frame51">Circulars</a></div>
+                </div>
+                <div class="Frame50">
+                    <div class="Logout">
+                        <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.7761 5 19 5.22386 19 5.5V18.5C19 18.7761 18.7761 19 18.5 19H5.5C5.22386 19 5 18.7761 5 18.5V5.5C5 5.22386 5.22386 5 5.5 5H18.5ZM11 8.79289L10.1046 9.68826L11.7929 11.3766H7V12.6234H11.7929L10.1046 14.3117L11 15.2071L14.2071 12L11 8.79289Z" fill="white"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="Logout">Logout</div>
+                </div>
+            </div>
+            <div class="dashboard">
+            <h1>Welcome, {{ student.Name }}!</h1>
+                <div class="user-details">
+                    {% if user.gender == "Male" %}
+                        <!-- Male user icon -->
+                        <svg class="user-image" xmlns="http://www.w3.org/2000/svg" 
+                            width="100" 
+                            height="100" 
+                            fill="currentColor" 
+                            class="bi bi-gender-male" 
+                            viewBox="0 0 16 16">
+                            <path d="M10.5 0a5.5 5.5 0 0 0-5 8v3.6H5V8a7 7 0 0 1 11.1-5.7A5.5 5.5 0 0 0 10.5 0zM8 14h1v2H7v-2H6v-1h1v-2h1v2z"/>
+                        </svg>
+                    {% elif user.gender == "Female" %}
+                        <!-- Female user icon -->
+                        <svg class="user-image" xmlns="http://www.w3.org/2000/svg" 
+                            width="100" 
+                            height="100" 
+                            fill="currentColor" 
+                            class="bi bi-gender-female" 
+                            viewBox="0 0 16 16">
+                            <path d="M8 0C5.923 0 4.209.712 3 1.882v-.001C1.691 3.041 1 4.527 1 6.154 1 8.231 2.134 9 3.5 9h.001V8H3.5a1 1 0 0 0 0-2h-.001V5a1 1 0 0 0-1-1 1 1 0 0 0-1 1v1.382A5.49 5.49 0 0 0 0 6.997C0 8.43 1.343 10 4 10v1h1v-1a1 1 0 0 0-1-1 1 1 0 0 0-1 1v1.382A5.49 5.49 0 0 0 0 11.997C0 13.43 1.343 15 4 15h1v1h2v-1h2v1h2v-1h1c2.657 0 4-1.57 4-3.003a5.49 5.49 0 0 0-3-4.994V5.5a2.5 2.5 0 0 0-2.5-2.5h-1A2.5 2.5 0 0 0 8 1.5a2.5 2.5 0 0 0-2.5 2.5H4a5.49 5.49 0 0 0-3 4.994v.003C.476 9.269 0 8.217 0 6.997 0 3.57 2.686 1 5.5 1S11 3.57 11 6.997c0 1.343-.564 2.564-1.465 3.407A1.5 1.5 0 0 0 10.5 12h-1a1.5 1.5 0 0 0 0 3h1c.314 0 .6-.097.832-.254A3.509 3.509 0 0 1 13 12.994C13 10.57 10.314 8 7.5 8h-.001V9H7.5c1.366 0 2.5.769 2.5 2.846v.001c0 1.627-.69 3.113-1.999 4.273v.001C11.792 15.289 13 13.673 13 11.997a3.509 3.509 0 0 0-3.332-3.5A1.499 1.499 0 0 0 8 8.5H7a1.5 1.5 0 0 0 0 3h1a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H7a1.5 1.5 0 0 0 0 3h1a.5.5 0 0 0 .5-.5V10c0-.964-.32-1.655-.856-2.197C7.321 6.878 7 6.527 7 5.5c0-1.378.716-2.5 1.5-2.5H9c.784 0 1.5 1.122 1.5 2.5 0 .527-.315 .878-.644 1.303C9.32 6.345 9 6.696 9 7.5a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 0-1h-.5v-2H9a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 0-1h-.5v-1H8c-1.366 0-2.5.769-2.5 2.846v.001c0 1.627.69 3.113 1.999 4.273v.001C6.208 15.289 5 13.673 5 11.997a3.509 3.509 0 0 1 3.332-3.5A1.499 1.499 0 0 1 10 9.5H9a1.5 1.5 0 0 1 0-3h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H9a1.5 1.5 0 0 1 0-3h1a.5.5 0 0 1 .5.5V10c0 .964-.32 1.655-.856 2.197-.536.546-1.008.803-1.644 1.096C7.678 13.454 7 14.184 7 15.5c0 1.378 1.116 2.5 2.5 2.5h1c1.384 0 2.5-1.122 2.5-2.5 0-.527-.315-.878-.644-1.303.318-.451.644-.802.644-1.697 0-1.378-.716-2.5-1.5-2.5z"/>
+                        </svg>
+                    {% endif %}
+                    <div>{{ user.name }}</div> <!-- Assuming 'name' is a field in your user model -->
+                    <div>{{ user.usn }}</div> <!-- Assuming 'usn' is a field in your user model -->
+                    <div>{{ user.sem }}</div> <!-- Assuming 'sem' is a field in your user model -->
+                    <div>{{ user.year_of_joining }}</div> <!-- Assuming 'year_of_joining' is a field in your user model -->
+                    <div>{{ user.mobile }}</div> <!-- Assuming 'mobile' is a field in your user model -->
+                    <div>{{ user.email }}</div> <!-- Assuming 'email' is a field in your user model -->
+                    <a href="{% url 'mark_attendance' %}">Mark Attendance</a>  <!-- Link to the mark attendance page -->
+                    <a href="{% url 'attendance_list' %}">Attendance List</a>  <!-- Link to the attendance list page -->
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 
 </html>
