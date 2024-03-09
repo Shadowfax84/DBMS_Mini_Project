@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Courses</title>
+</head>
+
+<body>
+    <h1>Faculty Courses</h1>
+
+    {% if courses %}
+        <ul>
+            {% for course in courses %}
+                <li>{{ course.Subject_ID }} - {{ course.Subject_Name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No courses available for the selected department.</p>
+    {% endif %}
+</body>
+
+</html>

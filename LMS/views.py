@@ -14,6 +14,9 @@ from django.contrib import messages
 from .forms import AttendanceForm
 from .models import *
 from django.contrib.auth.decorators import login_required
+from .forms import TeacherSignupForm
+from .models import Faculty
+from django.http import HttpResponseForbidden
 
 
 def landing_page(request):
@@ -243,6 +246,25 @@ class AttendanceDeleteView(DeleteView):
     # Redirect to attendance list page after successful deletion
     success_url = reverse_lazy('attendance_list')
 
+def marks_list(request):
+    marks = Marks.objects.all()
+    return render(request, 'marks.html', {'marks': marks})
+
+def marks_update(request, pk):
+    mark = get_object_or_404(Marks, pk=pk)
+    form = MarksForm(request.POST or None, instance=mark)
+    if form.is_valid():
+        form.save()
+        return redirect('marks_list')
+    return render(request, 'marks_form.html', {'form': form})
+
+def marks_delete(request, pk):
+    mark = get_object_or_404(Marks, pk=pk)
+    if request.method == 'POST':
+        mark.delete()
+        return redirect('marks_list')
+    return render(request, 'marks_confirm_delete.html', {'mark': mark})
+
 
 def user_courses(request):
     user_subjects = Course.objects.filter(user=request.user)
@@ -252,3 +274,7 @@ def user_courses(request):
         'user_subjects': user_subjects
     }
     return render(request, 'student_courses.html', context)
+
+from django.shortcuts import render
+from .models import Course
+

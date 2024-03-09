@@ -37,5 +37,9 @@ urlpatterns = [
          AttendanceUpdateView.as_view(), name='attendance_update'),
     path('attendance/<int:pk>/delete/',
          AttendanceDeleteView.as_view(), name='attendance_delete'),
+    path('marks/', views.marks_list, name='marks_list'),
+    path('marks/<int:pk>/update/', views.marks_update, name='marks_update'),
+    path('marks/<int:pk>/delete/', views.marks_delete, name='marks_delete'),
+    #path('faculty_course/', faculty_course, name='faculty_course'),
     path('home/', views.home, name='home'),
 ]
