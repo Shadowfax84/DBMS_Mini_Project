@@ -19,15 +19,15 @@
     }
 
     .bg-c-blue {
-      background: linear-gradient(45deg, #4099ff, #597481);
+      background: linear-gradient(45deg,  #FF5370, #597481);
     }
 
     .bg-c-green {
-      background: linear-gradient(45deg, #2ed8b6, #597481);
+      background: linear-gradient(45deg, #FF5370, #597481);
     }
 
     .bg-c-yellow {
-      background: linear-gradient(45deg, #FFB64D, #597481);
+      background: linear-gradient(45deg, #FF5370, #597481);
     }
 
     .bg-c-pink {
@@ -72,7 +72,7 @@
           <div class="card-block">
             <h6 class="m-b-20">Name</h6>
             <h2 class="text-right"><i class="fas fa-user-tie f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{request.user.first_name}}</span></p>
+            <p><span style="font-size: 20px;">{{student.Name}}</span></p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
           <div class="card-block">
             <h6 class="m-b-20">Contact</h6>
             <h2 class="text-right"><i class="fas fa-mobile-alt f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{mobile}}</span></p>
+            <p><span style="font-size: 20px;">{{student.Phone_No}}</span></p>
 
           </div>
         </div>
@@ -91,9 +91,9 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Roll</h6>
+            <h6 class="m-b-20">USN</h6>
             <h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{roll}}</span></p>
+            <p><span style="font-size: 20px;">{{student.USN}}</span></p>
           </div>
         </div>
       </div>
@@ -101,9 +101,9 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-pink order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Fee</h6>
+            <h6 class="m-b-20">Dept ID</h6>
             <h2 class="text-right"><i class="fas fa-dollar f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{fee}}</span></p>
+            <p><span style="font-size: 20px;">{{student.Dept_ID}}</span></p>
           </div>
         </div>
       </div>

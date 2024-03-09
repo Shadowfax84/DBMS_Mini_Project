@@ -235,6 +235,7 @@
         </div>
         <div class="dashboard">
           <h1>Welcome, {{ student.Name }}!</h1>
+          {%include 'student_dashboardcards.html'%}
             <div class="user-details">
                 {% if user.gender == "Male" %}
                     <!-- Male user icon -->

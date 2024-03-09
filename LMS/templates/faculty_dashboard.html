@@ -214,8 +214,8 @@
                 <div class="Frame46">
                 <div class="Frame47">Dashboard</a></div>
                 <div class="Frame48">Courses</a></div>
-                <div class="Frame49">Marks</a></div>
-                <div class="Frame50">Attendance</a></div>
+                <div class="Frame49"><a href="{% url 'enter_marks' %}"></a>Marks</a></div>
+                <div class="Frame50"><a href="{% url 'mark_attendance' %}">Attendance</a></a></div>
                 <div class="Frame51">Circulars</a></div>
                 </div>
                 <div class="Frame50">
@@ -234,7 +234,7 @@
                 </div>
             </div>
             <div class="dashboard">
-            <h1>Welcome, {{ student.Name }}!</h1>
+            <h1>Welcome, {{ Faculty.Name }}!</h1>
                 <div class="user-details">
                     {% if user.gender == "Male" %}
                         <!-- Male user icon -->
