@@ -75,20 +75,54 @@ def student_signup(request):
 
 
 def teacher_signup(request):
-    if request.method == 'POST':
-        form = TeacherSignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect('login_page')
-        if request.user.is_authenticated:
-            # If the user is already authenticated, redirect to the login page
-            return redirect('/login-page/')
-    else:
-        form = TeacherSignupForm()
-        # Query the database to get dept_id values
-        Dept_ids = Faculty.objects.values_list('Dept_ID', flat=True).distinct()
+    departments = Dept.objects.all()
+    courses = Course.objects.all()
 
-    return render(request, 'teacher_signup.html', {'form': form})
+    if request.method == 'POST':
+        faculty_id = request.POST.get('faculty_id')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        name = request.POST.get('name')
+        qualifications = request.POST.get('Qualifications')
+        email = request.POST.get('email')
+        phone_no = request.POST.get('phone_no')
+        papers_published = request.POST.get('papers_published')
+        dept_id = request.POST.get('dept_id')
+        subjects = request.POST.getlist('subjects')
+
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return redirect('/teacher-signup/')  # Redirect to signup page
+
+        # Retrieve the Dept instance corresponding to the dept_id
+        try:
+            dept_instance = Dept.objects.get(Dept_ID=dept_id)
+        except Dept.DoesNotExist:
+            messages.error(request, 'Invalid Department ID.')
+            return redirect('/teacher-signup/')  # Redirect to signup page
+
+        # Create a new faculty instance
+        faculty = Faculty.objects.create(
+            Faculty_ID=faculty_id,
+            Name=name,
+            Qualifications=qualifications,
+            Papers_Published=papers_published,
+            Phone_No=phone_no,
+            Email=email,
+        )
+        # Add selected subjects to the faculty
+        faculty.Subject_ID.set(subjects)
+        # Add department to the faculty
+        faculty.Dept_ID.add(dept_instance)
+
+        # Create a new user account
+        user = User.objects.create_user(
+            username=faculty_id, password=password, email=email)
+
+        if user:
+            return redirect('/login-page/')
+
+    return render(request, 'teacher_signup.html', {'departments': departments, 'courses': courses})
 
 
 def login_page(request):
