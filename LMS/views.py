@@ -28,14 +28,50 @@ def home(request):
 
 
 def student_signup(request):
+    departments = Dept.objects.all()
+    courses = Course.objects.all()
     if request.method == 'POST':
-        form = StudentSignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect('login_page')
-    else:
-        form = StudentSignupForm()
-    return render(request, 'student_signup.html', {'form': form})
+        usn = request.POST.get('usn')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        name = request.POST.get('name')
+        gender = request.POST.get('gender')
+        email = request.POST.get('email')
+        phone_no = request.POST.get('phone_no')
+        joining_year = request.POST.get('joining_year')
+        dept_id = request.POST.get('dept_id')
+        subjects = request.POST.getlist('subjects')
+
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return redirect('/student-signup/')  # Redirect to signup page
+
+         # Retrieve the Dept instance corresponding to the dept_id
+        try:
+            dept_instance = Dept.objects.get(Dept_ID=dept_id)
+        except Dept.DoesNotExist:
+            messages.error(request, 'Invalid Department ID.')
+            return redirect('/student-signup/')  # Redirect to signup page
+
+        student = Student.objects.create(
+            USN=usn,
+            Name=name,
+            Gender=gender,
+            Phone_No=phone_no,
+            Email=email,
+            Joining_Year=joining_year,
+            Dept_ID=dept_instance,
+        )
+        # Add selected subjects to the student
+        student.Subject_ID.set(subjects)
+        # Create a new user account
+        user = User.objects.create_user(
+            username=usn, password=password, email=email)
+
+        if user:
+            return redirect('/login-page/')
+
+    return render(request, 'student_signup.html', {'departments': departments, 'courses': courses})
 
 
 def teacher_signup(request):
@@ -46,7 +82,7 @@ def teacher_signup(request):
             return redirect('login_page')
         if request.user.is_authenticated:
             # If the user is already authenticated, redirect to the login page
-            return redirect('/login_page/')
+            return redirect('/login-page/')
     else:
         form = TeacherSignupForm()
         # Query the database to get dept_id values
@@ -131,7 +167,9 @@ def logout_view(request):
 
 def student_dashboard(request):
     student_id = request.user.username  # Assuming username is USN
+    print(student_id)
     student = get_object_or_404(Student, USN=student_id)
+    print(student)
 
     sem = request.session.get('sem')  # Assuming you store semester in session
 
@@ -154,16 +192,18 @@ def student_dashboard(request):
 
 def faculty_dashboard(request):
     faculty_id = request.user.username  # Assuming username is Faculty_ID
+    print(faculty_id)
     faculty = get_object_or_404(Faculty, Faculty_ID=faculty_id)
-    
+    print(faculty)
 
-    context = {
-        'faculty': faculty,
-        
-       
-    }
+    # courses_taught = Course.objects.filter(faculty=faculty)
 
-    return render(request, 'faculty_dashboard.html', context)
+    # context = {
+    # 'faculty': faculty,
+    # 'courses_taught': courses_taught,
+    # }
+
+    return render(request, 'faculty_dashboard.html')
 
 
 class MarkAttendanceView(View):
@@ -246,9 +286,11 @@ class AttendanceDeleteView(DeleteView):
     # Redirect to attendance list page after successful deletion
     success_url = reverse_lazy('attendance_list')
 
+
 def marks_list(request):
     marks = Marks.objects.all()
     return render(request, 'marks.html', {'marks': marks})
+
 
 def marks_update(request, pk):
     mark = get_object_or_404(Marks, pk=pk)
@@ -258,6 +300,7 @@ def marks_update(request, pk):
         return redirect('marks_list')
     return render(request, 'marks_form.html', {'form': form})
 
+
 def marks_delete(request, pk):
     mark = get_object_or_404(Marks, pk=pk)
     if request.method == 'POST':
@@ -266,15 +309,35 @@ def marks_delete(request, pk):
     return render(request, 'marks_confirm_delete.html', {'mark': mark})
 
 
-def user_courses(request):
-    user_subjects = Course.objects.filter(user=request.user)
-    print(user_subjects)
+def student_courses(request):
+    # Assuming 'usn' is passed as a query parameter or retrieved from the session
+    user = request.user.username
+    print(user)
 
-    context = {
-        'user_subjects': user_subjects
-    }
-    return render(request, 'student_courses.html', context)
+    student = Student.objects.get(USN=user)
+    print(student)
+    subject_ids = student.Subject_ID.all()
+    print("hello")
+    print(subject_ids)
 
-from django.shortcuts import render
-from .models import Course
+    faculty_details = []
+    print(faculty_details)
 
+    # Iterate over the subject IDs and query the Faculty table for each subject
+    for subject_id in subject_ids:
+        faculty = Faculty.objects.filter(Subject_ID=subject_id).first()
+        if faculty:
+            faculty_dept = faculty.Dept_ID.first()  # Assuming Dept_ID is a ManyToManyField
+            faculty_details.append({
+                'subject_id': subject_id,
+                'subject_name': subject_id.Subject_Name,
+                'dept_id': faculty_dept.Dept_ID,
+                'dept_name': faculty_dept.Dept_Name,
+                'faculty_id': faculty.Faculty_ID,
+                'faculty_name': faculty.Name,
+                'qualification': faculty.Qualifications,
+                'faculty_email': faculty.Email,
+                'phone': faculty.Phone_No
+            })
+
+    return render(request, 'student_courses.html', {'faculty_details': faculty_details})

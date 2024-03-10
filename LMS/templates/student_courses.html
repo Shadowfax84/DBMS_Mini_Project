@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card .card-block {
+            padding: 25px;
+        }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-green {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-pink {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student Courses</h1>
+        <div class="row">
+            {% for faculty_detail in faculty_details %}
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Subject ID</h6>
+                        <h2 class="text-right"><i class="fas fa-user-tie f-left"></i></h2>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.subject_id }}</span></p>
+                        <h6 class="m-b-20">Subject_Name</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.subject_name }}</span></p>
+                        <h6 class="m-b-20">Dept_ID</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.dept_id }}</span></p>
+                        <h6 class="m-b-20">Dept_Name</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.dept_name }}</span></p>
+                        <h6 class="m-b-20">Faculty_ID</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.faculty_id }}</span></p>
+                        <h6 class="m-b-20">Faculty_Name</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.faculty_name }}</span></p>
+                        <h6 class="m-b-20">Qualifications</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.faculty_qualification }}</span></p>
+                        <h6 class="m-b-20">Email</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.faculty_email }}</span></p>
+                        <h6 class="m-b-20">Phone_No</h6>
+                        <p><span style="font-size: 20px;">{{ faculty_detail.faculty_phone }}</span></p>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

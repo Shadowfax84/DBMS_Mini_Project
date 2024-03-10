@@ -51,7 +51,7 @@
   top: calc(50% - 438px);
   box-shadow: 2px 2px 30px 0px rgba(0, 189, 170, 0.25);
 }
-.frame-552 {
+.frame-55 {
   border-radius: 10px;
   padding: 10px;
   display: flex;
@@ -71,14 +71,6 @@
   flex-shrink: 0;
   position: relative;
 }
-.select-role {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  position: relative;
-}
 .frame-41 {
   border-radius: 6px;
   border-style: solid;
@@ -89,24 +81,7 @@
   height: 28px;
   position: relative;
 }
-.keyboard-arrow-down {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
-.student {
-  color: #955c7e;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  position: absolute;
-  left: 7px;
-  top: calc(50% - 10px);
-}
+
 .frame-56 {
   display: flex;
   flex-direction: column;
@@ -292,14 +267,6 @@
   height: 36px;
   position: relative;
 }
-.keyboard-arrow-down2 {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
 .frame-37 {
   display: flex;
   flex-direction: row;
@@ -367,14 +334,7 @@
   font-weight: 400;
   position: relative;
 }
-.keyboard-arrow-down4 {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
+
 .frame-283 {
   display: flex;
   flex-direction: column;
@@ -392,14 +352,7 @@
   font-weight: 400;
   position: relative;
 }
-.keyboard-arrow-down5 {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
+
 .frame-262 {
   background: #8c4a6f;
   border-radius: 6px;

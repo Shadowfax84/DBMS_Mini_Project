@@ -52,13 +52,14 @@ class Student(models.Model):
 class Faculty(models.Model):
     Faculty_ID = models.CharField(max_length=10, primary_key=True)
     Name = models.CharField(max_length=255)
-    Qualifications = models.CharField(max_length=6, choices=[(
-        'b.e', 'B.E'), ('b.sc', 'B.Sc'), ('m.tech', 'M.Tech'), ('m.sc', 'M.Sc'), ('phd', 'PhD')])
+    Qualifications = models.CharField(max_length=6, choices=[
+        ('b.e', 'B.E'), ('b.sc', 'B.Sc'), ('m.tech', 'M.Tech'), ('m.sc', 'M.Sc'), ('phd', 'PhD')])
     Papers_Published = models.IntegerField()
     Phone_No = models.CharField(max_length=10)
     Email = models.EmailField(max_length=255)
-    Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
-    Dept_ID = models.ForeignKey(Dept, on_delete=models.CASCADE)
+    Subject_ID = models.ManyToManyField(
+        Course, related_name='faculty_subjects')
+    Dept_ID = models.ManyToManyField(Dept, related_name='faculty_depts')
 
     def __str__(self):
         return self.Name

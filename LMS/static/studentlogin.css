@@ -71,14 +71,6 @@
   flex-shrink: 0;
   position: relative;
 }
-.select-role {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  position: relative;
-}
 .frame-41 {
   border-radius: 6px;
   border-style: solid;
@@ -89,24 +81,7 @@
   height: 28px;
   position: relative;
 }
-.keyboard-arrow-down {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
-.student {
-  color: #955c7e;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  position: absolute;
-  left: 7px;
-  top: calc(50% - 10px);
-}
+
 .frame-58 {
   display: flex;
   flex-direction: column;
