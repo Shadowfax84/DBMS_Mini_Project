@@ -58,8 +58,13 @@
                                         <input type="text" class="frame-412" placeholder="Name" />
                                     </div>
                                     <div class="frame-272">
-                                        <div class="qualifications">Qualifications:</div>
-                                        <input type="text" class="frame-413" placeholder="Enter Qualifications" />
+                                        <div class="qualifications">Qualifications:</div>                                 
+                                         <select class="frame-413" name="Qualifications">
+                                         <option value="phd">PHD</option>
+                                         <option value="btech">B.Tech</option>
+                                         <option value="mtech">M.Tech</option>
+                                         <option value="other">Other</option>
+                                     </select>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +92,12 @@
                             </div>                       
                             <div class="frame-283">
                                 <div class="subject-id">Subject ID:</div>
-                                <input type="text" class="frame-412" placeholder="Enter SubjectIDs" />
+                                <select name="subjects" class="frame-412" multiple>
+                                    {% for course in courses %}
+                                        <option value="{{ course.Subject_ID }}">{{ course.Subject_Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             </div>
                             </div>
                         </div>                        
