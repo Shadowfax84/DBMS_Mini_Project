@@ -141,12 +141,15 @@ def student_login(request):
     if request.method == 'POST':
         usn = request.POST.get('usn')
         password = request.POST.get('password')
+        print(usn, password)
 
         # Authenticate the user
         user = authenticate(request, username=usn, password=password)
-
+        print("good")
         if user is not None:
+            print("ifin")
             login(request, user)
+            print("loggedin")
             # Create a new LoginHistory record for the logged-in user
             LoginHistory.objects.create(
                 user=user, login_timestamp=datetime.now())
@@ -154,9 +157,9 @@ def student_login(request):
         else:
             # Authentication failed
             return render(request, 'student_login.html', {'error_message': 'Invalid USN or password'})
+    print("test1")
 
     return render(request, 'student_login.html')
-
 
 def teacher_login(request):
     if request.method == 'POST':
@@ -226,18 +229,31 @@ def student_dashboard(request):
 
 def faculty_dashboard(request):
     faculty_id = request.user.username  # Assuming username is Faculty_ID
-    print(faculty_id)
     faculty = get_object_or_404(Faculty, Faculty_ID=faculty_id)
-    print(faculty)
+    
+    # Get the courses assigned to the faculty
+    faculty_courses = faculty.Subject_ID.all()
 
-    # courses_taught = Course.objects.filter(faculty=faculty)
+    subjects_per_course = {}
+    dept_course_mapping = {}
+    
+    # Iterate through each course
+    for course in faculty_courses:
+        # Get the related subjects for the current course
+        subjects = Course.objects.filter(Dept_ID=course.Dept_ID, Sem=course.Sem)
+        subjects_per_course[course] = subjects
+        dept = course.Dept_ID
+        if dept:
+            if dept not in dept_course_mapping:
+                dept_course_mapping[dept] = []
+            dept_course_mapping[dept].append(course)
+    context = {
+        'faculty': faculty,
+        'subjects_per_course': subjects_per_course,
+        'dept_course_mapping': dept_course_mapping,
+    }
 
-    # context = {
-    # 'faculty': faculty,
-    # 'courses_taught': courses_taught,
-    # }
-
-    return render(request, 'faculty_dashboard.html')
+    return render(request, 'faculty_dashboard.html', context)
 
 
 class MarkAttendanceView(View):

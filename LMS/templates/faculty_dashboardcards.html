@@ -93,7 +93,13 @@
           <div class="card-block">
             <h6 class="m-b-20">Subject ID</h6>
             <h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{faculty.Subject_ID}}</span></p>
+            <p><span style="font-size: 20px;">{% for course, subjects in subjects_per_course.items %}
+              <ul>
+                  {% for subject in subjects %}
+                      <li>{{ subject.Subject_Name }}</li>
+                  {% endfor %}
+              </ul>
+          {% endfor %}</span></p>
             
           </div>
         </div>
@@ -104,7 +110,9 @@
           <div class="card-block">
             <h6 class="m-b-20">Dept ID</h6>
             <h2 class="text-right"><i class="fas fa-dollar f-left"></i></h2>
-            <p><span style="font-size: 20px;">{{faculty.Dept_ID}}</span></p>
+            <p><span style="font-size: 20px;">{% for dept, courses in dept_course_mapping.items %}
+              <li>{{ dept.Dept_Name }} - {{ dept.Dept_ID }}</li>
+          {% endfor %}</span></p>
           </div>
         </div>
       </div>
