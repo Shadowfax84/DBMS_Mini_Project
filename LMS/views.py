@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
@@ -11,12 +12,8 @@ from .models import *
 from .forms import *
 from datetime import datetime
 from django.contrib import messages
-from .forms import AttendanceForm
-from .models import *
-from django.contrib.auth.decorators import login_required
-from .forms import TeacherSignupForm
-from .models import Faculty
-from django.http import HttpResponseForbidden
+import matplotlib
+matplotlib.use('Agg')
 
 
 def landing_page(request):
@@ -161,6 +158,7 @@ def student_login(request):
 
     return render(request, 'student_login.html')
 
+
 def teacher_login(request):
     if request.method == 'POST':
         # Retrieve data from the form
@@ -230,17 +228,18 @@ def student_dashboard(request):
 def faculty_dashboard(request):
     faculty_id = request.user.username  # Assuming username is Faculty_ID
     faculty = get_object_or_404(Faculty, Faculty_ID=faculty_id)
-    
+
     # Get the courses assigned to the faculty
     faculty_courses = faculty.Subject_ID.all()
 
     subjects_per_course = {}
     dept_course_mapping = {}
-    
+
     # Iterate through each course
     for course in faculty_courses:
         # Get the related subjects for the current course
-        subjects = Course.objects.filter(Dept_ID=course.Dept_ID, Sem=course.Sem)
+        subjects = Course.objects.filter(
+            Dept_ID=course.Dept_ID, Sem=course.Sem)
         subjects_per_course[course] = subjects
         dept = course.Dept_ID
         if dept:
@@ -391,3 +390,42 @@ def student_courses(request):
             })
 
     return render(request, 'student_courses.html', {'faculty_details': faculty_details})
+
+
+def student_attendance(request):
+    # Assuming the logged-in user's USN is stored in the username field
+    usn = request.user.username
+
+    # Query attendance records for the logged-in user
+    attendance_records = Attendance.objects.filter(USN__USN=usn)
+
+    # Calculate attendance percentage for each subject
+    subject_attendance = {}
+    for record in attendance_records:
+        subject = record.Subject_ID
+        total_classes = Attendance.objects.filter(
+            USN__USN=usn, Subject_ID=subject).count()
+        attended_classes = Attendance.objects.filter(
+            USN__USN=usn, Subject_ID=subject, Attendance_status='P').count()
+        if total_classes > 0:
+            attendance_percentage = (attended_classes / total_classes) * 100
+        else:
+            attendance_percentage = 0
+        subject_attendance[subject] = attendance_percentage
+        # Create a pie chart for each subject
+        plt.figure()
+        plt.pie([attended_classes, total_classes - attended_classes], labels=['Attended', 'Absent'],
+                autopct='%1.1f%%', startangle=90)
+        plt.title(f'Attendance for {subject.Subject_Name}')
+        plt.axis('equal')
+        filename = f'attendance_pie_chart_{subject.Subject_ID}.png'
+        plt.savefig(f'C:\\DBMS_project\\auxilium\\LMS\\static\\{filename}')
+        plt.close()
+
+    # Generate HTML table for attendance records
+    context = {
+        'attendance_records': attendance_records,
+        'subject_attendance': subject_attendance,
+    }
+
+    return render(request, 'student_attendance.html', context)

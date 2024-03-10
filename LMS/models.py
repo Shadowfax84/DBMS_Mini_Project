@@ -78,9 +78,13 @@ class Attendance(models.Model):
     USN = models.ForeignKey(Student, on_delete=models.CASCADE)
     Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
     Date = models.DateField()
-    Attendance_status = models.CharField(max_length=10)
+    Attendance_status = models.CharField(max_length=2, choices=[
+        ('P', 'Present'), ('AB', 'Absent')])
     Behaviour_Score = models.IntegerField(null=True)
     Attendance_Score = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.USN.Name+" - "+self.Subject_ID.Subject_Name
 
 
 class Marks(models.Model):

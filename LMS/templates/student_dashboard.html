@@ -131,7 +131,8 @@
 
         .Frame47,
         .Frame49,
-        .Frame50 {
+        .Frame50,
+        .Frame52 {
             /* Your existing styles */
             cursor: pointer; /* Change cursor to pointer on hover */
         }
@@ -166,6 +167,12 @@
     }
 
     .user-courses {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .user-attendance {
         display: none;
         text-align: center;
         margin-top: 20px;
@@ -240,7 +247,7 @@
               <div class="Frame48">Grades</a></div>
               <div class="Frame49">Schedule</a></div>
               <div class="Frame50">Courses</a></div>
-              <div class="Frame52"><a href="{% url 'attendance_list' %}">Attendance</a></div>
+              <div class="Frame52">Attendance</a></div>
               <div class="Frame53">Extra Curricular</a></div>
             </div>
             <div class="Frame50">
@@ -270,6 +277,8 @@
             <div class="user-courses" id="course-container">
                 <a href="{% url 'student_courses' %}">View Courses</a>
             </div>
+            <div class="user-attendance" id="attendance-container">
+                <a href="{% url 'student_attendance' %}">View Attendance</a>
         </div>
     </div>
     <script>
@@ -280,6 +289,7 @@
             document.querySelector('.user-details').style.display = 'none';
             document.querySelector('.user-schedule').style.display = 'none';
             document.querySelector('.user-courses').style.display = 'none';
+            document.querySelector('.user-attendance').style.display = 'none';
         }
     
         // Function to show user-details and hide user-schedule and user-courses
@@ -299,11 +309,18 @@
             hideAll();
             document.querySelector('.user-courses').style.display = 'block';
         }
-    
+        
+        // Function to show user-attendance and hide user-details and user-schedule
+        function showAttendance() {
+            hideAll();
+            document.querySelector('.user-attendance').style.display = 'block';
+        }
+        
         // Event listeners to trigger the functions
         document.querySelector('.Frame47').addEventListener('click', showDetails);
         document.querySelector('.Frame49').addEventListener('click', showSchedule);
         document.querySelector('.Frame50').addEventListener('click', showCourses);
+        document.querySelector('.Frame52').addEventListener('click', showAttendance);
     
         // Initialize by hiding all sections except user-details
         hideAll();

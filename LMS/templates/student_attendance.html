@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .chart-item {
+            margin: 10px; /* Adjust spacing between charts */
+        }
+    </style>
+</head>
+
+{% load static %}
+
+<body>
+    <h1>Student Attendance</h1>
+
+    <!-- Attendance Percentage by Subject -->
+    <div>
+        <h2>Attendance Percentage by Subject</h2>
+        <div class="chart-container">
+            {% for subject_id, percentage in subject_attendance.items %}
+                <div class="chart-item">
+                    <h3>{{ subject_id.Subject_Name }}</h3>
+                    <img src="{% static 'attendance_pie_chart_' %}{{ subject_id.Subject_ID }}.png" alt="Attendance Pie Chart">
+                </div>
+                {% if forloop.counter|divisibleby:"2" %}
+                    </div><div class="chart-container">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

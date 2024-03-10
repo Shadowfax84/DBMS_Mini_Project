@@ -39,5 +39,4 @@ In Django settings update the database settings:
 Django Adminstrator:
     username: aux_admin
     password: Admin@96321
-
-Have to reconfigure the sign up and login pages
+    

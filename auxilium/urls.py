@@ -42,5 +42,6 @@ urlpatterns = [
     path('marks/<int:pk>/delete/', views.marks_delete, name='marks_delete'),
     # path('faculty_course/', faculty_course, name='faculty_course'),
     path('student-courses/', student_courses, name='student_courses'),
+    path('student-attendance/', student_attendance, name='student_attendance'),
     path('home/', views.home, name='home'),
 ]
