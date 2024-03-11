@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Marks</title>
+</head>
+<body>
+    <h1>Edit Marks</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="USN">USN:</label>
+        <input type="text" id="USN" name="USN" value="{{ marks.USN.USN }}" readonly><br>
+        
+        <label for="Subject_ID">Subject ID:</label>
+        <input type="text" id="Subject_ID" name="Subject_ID" value="{{ marks.Subject_ID.Subject_Name }}" readonly><br>
+        
+        <label for="Sem">Semester:</label>
+        <input type="text" id="Sem" name="Sem" value="{{ marks.Sem }}" readonly><br>
+
+        <label for="Internal_Marks">Internal Marks:</label>
+        <input type="number" id="Internal_Marks" name="Internal_Marks" value="{{ marks.Internal_Marks }}"><br>
+        
+        <label for="Assignment_Marks">Assignment Marks:</label>
+        <input type="number" id="Assignment_Marks" name="Assignment_Marks" value="{{ marks.Assignment_Marks }}"><br>
+        
+        <label for="Seminar_Marks">Seminar Marks:</label>
+        <input type="number" id="Seminar_Marks" name="Seminar_Marks" value="{{ marks.Seminar_Marks }}"><br>
+        
+        <label for="External_Marks">External Marks:</label>
+        <input type="number" id="External_Marks" name="External_Marks" value="{{ marks.External_Marks }}"><br>
+        
+        <label for="Final_Marks">Final Marks:</label>
+        <input type="number" id="Final_Marks" name="Final_Marks" value="{{ marks.Final_Marks }}"><br>
+        
+        <label for="Performance">Performance:</label>
+        <input type="number" id="Performance" name="Performance" value="{{ marks.Performance }}"><br>
+        
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

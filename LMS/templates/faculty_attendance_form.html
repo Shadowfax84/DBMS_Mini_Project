@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Attendance</title>
+</head>
+<body>
+    <h1>Add Attendance</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="usn">USN:</label>
+        <select name="usn" id="usn">
+            {% for usn in usns %}
+                <option value="{{ usn }}">{{ usn }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="subject_id">Subject ID:</label>
+        <select name="subject_id" id="subject_id">
+            {% for subject_id in subject_ids %}
+                <option value="{{ subject_id }}">{{ subject_id }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br>
+        
+        <label for="Attendance_status">Attendance Status:</label>
+        <select id="Attendance_status" name="attendance_status" required>
+            <option value="" disabled selected>Select status</option>
+            <option value="P">Present</option>
+            <option value="AB">Absent</option>
+        </select><br>
+
+        <input type="submit" value="Submit" class="Submit">
+    </form>
+</body>
+</html>

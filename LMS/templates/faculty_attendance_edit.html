@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Attendance</title>
+</head>
+<body>
+    <h1>Edit Attendance</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="USN">USN:</label>
+        <input type="text" id="USN" name="USN" value="{{ attendance.USN.USN }}" readonly><br>
+        
+        <label for="Subject_ID">Subject ID:</label>
+        <input type="text" id="Subject_ID" name="Subject_ID" value="{{ attendance.Subject_ID.Subject_Name }}" readonly><br>
+        
+        <label for="Date">Date:</label>
+        <input type="text" id="Date" name="Date" value="{{ attendance.Date }}"readonly><br>
+
+        <label for="attendance_status">Attendance Status:</label>
+        <select id="attendance_status" name="attendance_status">
+            <option value="P" {% if attendance.Attendance_status == 'P' %} selected {% endif %}>Present</option>
+            <option value="AB" {% if attendance.Attendance_status == 'AB' %} selected {% endif %}>Absent</option>
+        </select><br>
+        
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

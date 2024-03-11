@@ -159,29 +159,30 @@
         max-width: 100%;
         height: auto;
         overflow: hidden; /* Hide any overflowing content */
-    }
+         }
 
-    .user-schedule .schedule {
-        width: 100%; /* Ensure the image takes up the full width of its container */
-        height: auto; /* Maintain aspect ratio */
-    }
+        .user-schedule .schedule {
+            width: 100%; /* Ensure the image takes up the full width of its container */
+            height: auto; /* Maintain aspect ratio */
+        }
 
-    .user-courses {
-        display: none;
-        text-align: center;
-        margin-top: 20px;
-    }
+        .user-courses {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .user-attendance {
-        display: none;
-        text-align: center;
-        margin-top: 20px;
-    }
+        .user-attendance {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
 
     </style>
 </head>
 
 <body>
+    {% csrf_token %}
     <div class="Frame43">
         <img class="ilogo" src="{% static 'ilogo.png' %}" />
         <div class="Frame44">
@@ -279,6 +280,7 @@
             </div>
             <div class="user-attendance" id="attendance-container">
                 <a href="{% url 'student_attendance' %}">View Attendance</a>
+            </div>
         </div>
     </div>
     <script>

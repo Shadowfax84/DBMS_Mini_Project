@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance List</title>
+</head>
+<body>
+    <h1>Attendance List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>USN</th>
+                <th>Subject ID</th>
+                <th>Date</th>
+                <th>Attendance Status</th>
+                <th>Edit</th> <!-- New column for Edit button -->
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ attendance.USN }}</td>
+                <td>{{ attendance.Subject_ID }}</td>
+                <td>{{ attendance.Date }}</td>
+                <td>{{ attendance.Attendance_status }}</td>
+                <!-- Edit button linking to edit view with mark id -->
+                <td><a href="{% url 'faculty_attendance_edit' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}">Edit</a></td>
+                <td><a href="{% url 'faculty_attendance_delete' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'faculty_attendance_add' %}">Add Attendance</a>
+</body>
+</html>

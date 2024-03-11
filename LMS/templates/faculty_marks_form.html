@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Mark</title>
+</head>
+<body>
+    <h1>Add Mark</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="usn">USN:</label>
+        <select name="usn" id="usn">
+            {% for usn in usns %}
+                <option value="{{ usn }}">{{ usn }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="subject_id">Subject ID:</label>
+        <select name="subject_id" id="subject_id">
+            {% for subject_id in subject_ids %}
+                <option value="{{ subject_id }}">{{ subject_id }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="sem">Semester:</label>
+        <input type="number" id="sem" name="sem" required><br>
+        
+
+        <label for="internal_marks">Internal Marks:</label>
+        <input type="number" id="internal_marks" name="internal_marks" required><br>
+
+        <label for="assignment_marks">Assignment Marks:</label>
+        <input type="number" id="assignment_marks" name="assignment_marks" required><br>
+
+        <label for="seminar_marks">Seminar Marks:</label>
+        <input type="number" id="seminar_marks" name="seminar_marks" required><br>
+
+        <label for="external_marks">External Marks:</label>
+        <input type="number" id="external_marks" name="external_marks" required><br>
+
+        <label for="final_marks">Final Marks:</label>
+        <input type="number" id="final_marks" name="final_marks" required><br>
+
+        <label for="performance">Performance:</label>
+        <input type="number" id="performance" name="performance"><br>
+
+        <input type="submit" value="Submit" class="Submit">
+    </form>
+</body>
+</html>

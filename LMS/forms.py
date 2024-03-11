@@ -86,11 +86,12 @@ class AttendanceForm(forms.ModelForm):
             'Date': forms.DateInput(attrs={'type': 'date'}),
             'Attendance_status': forms.Select(choices=[('Present', 'Present'), ('Absent', 'Absent')]),
         }
-    #def _init_(self, *args, **kwargs):
-        #super(AttendanceForm, self)._init_(*args, **kwargs)
+    # def _init_(self, *args, **kwargs):
+        # super(AttendanceForm, self)._init_(*args, **kwargs)
     # Query the Student and Course models to get the appropriate choices
-        #self.fields['USN'].queryset = Student.objects.all()
-        #self.fields['Subject_ID'].queryset = Course.objects.all()
+        # self.fields['USN'].queryset = Student.objects.all()
+        # self.fields['Subject_ID'].queryset = Course.objects.all()
+
 
 class MarksForm(forms.ModelForm):
     sem = forms.ChoiceField(choices=Course.SEMESTER_CHOICES, label='Sem')

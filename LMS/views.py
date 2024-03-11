@@ -1,10 +1,12 @@
+from .models import Attendance
+from django.shortcuts import render, get_object_or_404, redirect
 import matplotlib.pyplot as plt
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -13,6 +15,7 @@ from .forms import *
 from datetime import datetime
 from django.contrib import messages
 import matplotlib
+from .forms import MarksForm
 matplotlib.use('Agg')
 
 
@@ -164,6 +167,7 @@ def teacher_login(request):
         # Retrieve data from the form
         faculty_id = request.POST.get('username')
         password = request.POST.get('password')
+        print(faculty_id, password)
 
         # Check if the credentials are valid
         user = authenticate(username=faculty_id, password=password)
@@ -255,109 +259,6 @@ def faculty_dashboard(request):
     return render(request, 'faculty_dashboard.html', context)
 
 
-class MarkAttendanceView(View):
-    template_name = 'mark_attendance.html'
-
-    def get(self, request):
-        # Get existing USN and Subject IDs from the database
-        usn_list = Attendance.objects.values_list('USN', flat=True).distinct()
-        subject_id_list = Attendance.objects.values_list(
-            'Subject_ID', flat=True).distinct()
-
-        context = {
-            'usn_list': usn_list,
-            'subject_id_list': subject_id_list,
-        }
-        return render(request, self.template_name, context)
-
-    def post(self, request):
-        usn_id = request.POST.get('usn')
-        subject_id = request.POST.get('subjectId')
-        date_str = request.POST.get('date')
-        attendance_status = request.POST.get('attendanceStatus')
-
-        # Parse date string to datetime object
-        date = datetime.strptime(date_str, '%Y-%m-%d').date()
-
-        try:
-            # Retrieve Student object
-            student = get_object_or_404(Student, USN=usn_id)
-
-            # Create or update attendance record
-            Attendance.objects.create(
-                USN=student,
-                Subject_ID_id=subject_id,
-                Date=date,
-                Attendance_status=attendance_status
-            )
-
-            return JsonResponse({'status': 'success'})
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
-
-
-class AttendanceListView(ListView):
-    model = Attendance
-    template_name = 'attendance_list.html'  # Create this template
-    context_object_name = 'attendances'
-
-
-class AttendanceUpdateView(UpdateView):
-    model = Attendance
-    fields = ['USN', 'Subject_ID', 'Date', 'Attendance_status']
-    template_name = 'attendance_update.html'
-    success_url = reverse_lazy('attendance_list')
-
-    def form_valid(self, form):
-        # Get the instance of the Attendance object being updated
-        attendance_instance = form.save(commit=False)
-
-        # Perform any additional logic here, such as updating values
-        # For example, to update the Date field:
-        new_date = form.cleaned_data['date']
-        attendance_instance.date = new_date
-
-        # Update the Attendance_status field
-        new_attendance_status = form.cleaned_data['attendance_status']
-        attendance_instance.attendance_status = new_attendance_status
-
-        # Save the updated instance to the database
-        attendance_instance.save()
-
-        # Call the superclass's form_valid method to handle the rest of the logic
-        return super().form_valid(form)
-
-
-class AttendanceDeleteView(DeleteView):
-    model = Attendance
-    # Specify the path to the template
-    template_name = 'attendance_confirm_delete.html'
-    # Redirect to attendance list page after successful deletion
-    success_url = reverse_lazy('attendance_list')
-
-
-def marks_list(request):
-    marks = Marks.objects.all()
-    return render(request, 'marks.html', {'marks': marks})
-
-
-def marks_update(request, pk):
-    mark = get_object_or_404(Marks, pk=pk)
-    form = MarksForm(request.POST or None, instance=mark)
-    if form.is_valid():
-        form.save()
-        return redirect('marks_list')
-    return render(request, 'marks_form.html', {'form': form})
-
-
-def marks_delete(request, pk):
-    mark = get_object_or_404(Marks, pk=pk)
-    if request.method == 'POST':
-        mark.delete()
-        return redirect('marks_list')
-    return render(request, 'marks_confirm_delete.html', {'mark': mark})
-
-
 def student_courses(request):
     # Assuming 'usn' is passed as a query parameter or retrieved from the session
     user = request.user.username
@@ -429,3 +330,153 @@ def student_attendance(request):
     }
 
     return render(request, 'student_attendance.html', context)
+
+
+def marks_list(request):
+    marks = Marks.objects.all()
+    return render(request, 'faculty_marks_list.html', {'marks': marks})
+
+
+def attendance_list(request):
+    attendances = Attendance.objects.all()
+    return render(request, 'faculty_attendance_list.html', {'attendances': attendances})
+
+
+def marks_add(request):
+    if request.method == 'POST':
+        usn_id = request.POST.get('usn')
+        subject_id_id = request.POST.get('subject_id')
+        sem_id = request.POST.get('sem')
+        internal_marks = request.POST.get('internal_marks')
+        assignment_marks = request.POST.get('assignment_marks')
+        seminar_marks = request.POST.get('seminar_marks')
+        external_marks = request.POST.get('external_marks')
+        final_marks = request.POST.get('final_marks')
+        performance = request.POST.get('performance')
+
+        # Check if a Marks object with the same USN and Subject_ID already exists
+        existing_marks = Marks.objects.filter(
+            USN_id=usn_id, Subject_ID_id=subject_id_id).exists()
+        if existing_marks:
+            return redirect('faculty_marks_list')
+
+        # Create a new Marks object and save it
+        Marks.objects.create(
+            USN_id=usn_id,
+            Subject_ID_id=subject_id_id,
+            Sem=sem_id,
+            Internal_Marks=internal_marks,
+            Assignment_Marks=assignment_marks,
+            Seminar_Marks=seminar_marks,
+            External_Marks=external_marks,
+            Final_Marks=final_marks,
+            Performance=performance
+        )
+        # Assuming marks_list is the URL name for listing marks
+        return redirect('faculty_marks_list')
+
+    students = Student.objects.all()
+    usns = []
+    for student in students:
+        usn = student.USN
+        usns.append(usn)
+    courses = Course.objects.all()
+
+    subject_ids = []
+    for course in courses:
+        subject_id = course.Subject_ID
+        subject_ids.append(subject_id)
+
+    return render(request, 'faculty_marks_form.html', {'usns': usns, 'subject_ids': subject_ids})
+
+
+def attendance_add(request):
+    if request.method == 'POST':
+        usn_id = request.POST.get('usn')
+        subject_id_id = request.POST.get('subject_id')
+        date = request.POST.get('date')
+        attendance_status = request.POST.get('attendance_status')
+
+        # Check if a Marks object with the same USN and Subject_ID already exists
+        existing_attendance = Attendance.objects.filter(
+            USN_id=usn_id, Subject_ID_id=subject_id_id, Date=date).exists()
+        if existing_attendance:
+            return redirect('faculty_attendance_list')
+
+        # Create a new Marks object and save it
+        Attendance.objects.create(
+            USN_id=usn_id,
+            Subject_ID_id=subject_id_id,
+            Date=date,
+            Attendance_status=attendance_status
+        )
+        # Assuming marks_list is the URL name for listing marks
+        return redirect('faculty_attendance_list')
+
+    students = Student.objects.all()
+    usns = []
+    for student in students:
+        usn = student.USN
+        usns.append(usn)
+    courses = Course.objects.all()
+
+    subject_ids = []
+    for course in courses:
+        subject_id = course.Subject_ID
+        subject_ids.append(subject_id)
+
+    return render(request, 'faculty_attendance_form.html', {'usns': usns, 'subject_ids': subject_ids})
+
+
+def marks_edit(request, Subject_Name):
+    marks = get_object_or_404(Marks, Subject_ID__Subject_Name=Subject_Name)
+
+    if request.method == 'POST':
+        marks.Internal_Marks = request.POST.get('Internal_Marks')
+        marks.Assignment_Marks = request.POST.get('Assignment_Marks')
+        marks.Seminar_Marks = request.POST.get('Seminar_Marks')
+        marks.External_Marks = request.POST.get('External_Marks')
+        marks.Final_Marks = request.POST.get('Final_Marks')
+        marks.Performance = request.POST.get('Performance')
+
+        marks.save()
+
+        # Redirect to marks list page after saving changes
+        return redirect('faculty_marks_list')
+
+    return render(request, 'faculty_marks_edit.html', {'marks': marks})
+
+
+def attendance_edit(request, usn_name, subject_name, date):
+    attendance = get_object_or_404(
+        Attendance, USN__Name=usn_name, Subject_ID__Subject_Name=subject_name, Date=date)
+
+    if request.method == 'POST':
+        attendance.Attendance_status = request.POST.get('attendance_status')
+        attendance.save()
+
+        # Redirect to the attendance list page after saving changes
+        return redirect('faculty_attendance_list')
+
+    return render(request, 'faculty_attendance_edit.html', {'attendance': attendance})
+
+
+def marks_delete(request, Subject_Name):
+    mark = get_object_or_404(Marks, Subject_ID__Subject_Name=Subject_Name)
+
+    if request.method == 'POST':
+        mark.delete()
+        return redirect('faculty_marks_list')
+
+    return render(request, 'faculty_marks_delete.html', {'mark': mark})
+
+
+def attendance_delete(request, usn_name, subject_name, date):
+    attendance = get_object_or_404(Attendance, USN__Name=usn_name,
+                                   Subject_ID__Subject_Name=subject_name, Date=date)
+
+    if request.method == 'POST':
+        attendance.delete()
+        return redirect('faculty_attendance_list')
+
+    return render(request, 'faculty_attendance_delete.html', {'attendance': attendance})

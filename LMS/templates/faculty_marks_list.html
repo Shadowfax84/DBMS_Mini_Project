@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks List</title>
+</head>
+<body>
+    <h1>Marks List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>USN</th>
+                <th>Subject ID</th>
+                <th>Semester</th>
+                <th>Internal Marks</th>
+                <th>Assignment Marks</th>
+                <th>Seminar Marks</th>
+                <th>External Marks</th>
+                <th>Final Marks</th>
+                <th>Performance</th>
+                <th>Edit</th> <!-- New column for Edit button -->
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr>
+                <td>{{ mark.USN }}</td>
+                <td>{{ mark.Subject_ID }}</td>
+                <td>{{ mark.Sem }}</td>
+                <td>{{ mark.Internal_Marks }}</td>
+                <td>{{ mark.Assignment_Marks }}</td>
+                <td>{{ mark.Seminar_Marks }}</td>
+                <td>{{ mark.External_Marks }}</td>
+                <td>{{ mark.Final_Marks }}</td>
+                <td>{{ mark.Performance }}</td>
+                <!-- Edit button linking to edit view with mark id -->
+                <td><a href="{% url 'faculty_marks_edit' mark.Subject_ID.Subject_Name %}">Edit</a></td> 
+                <td><a href="{% url 'faculty_marks_delete' mark.Subject_ID.Subject_Name %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'faculty_marks_add' %}">Add Mark</a>
+</body>
+</html>

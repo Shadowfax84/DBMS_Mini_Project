@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Attendance Record</title>
+</head>
+<body>
+    <h1>Delete Attendance Record</h1>
+    <p>Are you sure you want to delete the attendance record for {{ attendance.USN.Name }} - {{ attendance.Subject_ID.Subject_Name }} on {{ attendance.Date }}?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+
+    <a href="{% url 'faculty_attendance_list' %}">Cancel</a>
+</body>
+</html>

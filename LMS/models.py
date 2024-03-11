@@ -30,6 +30,9 @@ class Course(models.Model):
     def __str__(self):
         return str(self.Subject_ID)
 
+    def get_semester_choices(self):
+        return dict(self.SEMESTER_CHOICES)
+
 
 class Student(models.Model):
     USN = models.CharField(max_length=10, primary_key=True)
@@ -90,14 +93,16 @@ class Attendance(models.Model):
 class Marks(models.Model):
     USN = models.ForeignKey(Student, on_delete=models.CASCADE)
     Subject_ID = models.ForeignKey(Course, on_delete=models.CASCADE)
-    Sem = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name='sem_marks')
+    Sem = models.CharField(max_length=15, choices=Course.SEMESTER_CHOICES)
     Internal_Marks = models.IntegerField()
     Assignment_Marks = models.IntegerField()
     Seminar_Marks = models.IntegerField()
     External_Marks = models.IntegerField()
     Final_Marks = models.IntegerField()
     Performance = models.IntegerField(null=True)
+
+    def __str__(self):
+        return f"{self.Subject_ID.Subject_Name} "
 
 
 class LoginHistory(models.Model):
