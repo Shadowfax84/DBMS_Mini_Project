@@ -3,15 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Your LMS</title>
-    <!-- Add your CSS styling here -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('{% static "bglanding.jpg" %}');
+            background-size: 100% ;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            height: 100vh; /* Ensure the body takes the full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1, p, ul, li, a {
+            color: #fff;
+        }
+
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #207cca;
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome to Your Learning Management System</h1>
-    <p>Sign up as:</p>
+<div>
+    <h2>Welcome To Your Learning Management System</h2>
+    <p>SIGN UP AS:</p>
     <ul>
         <li><a href="{% url 'student_signup' %}">Student</a></li>
         <li><a href="{% url 'teacher_signup' %}">Teacher</a></li>
     </ul>
     <p>Already have an account? <a href="{% url 'login_page' %}">Login</a></p>
-</body>
+</div>
 </html>

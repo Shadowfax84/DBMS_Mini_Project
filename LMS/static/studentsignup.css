@@ -1,8 +1,8 @@
-.desktop-30,
-.desktop-30 * {
+.desktop-34,
+.desktop-34 * {
   box-sizing: border-box;
 }
-.desktop-30 {
+.desktop-34 {
   background: #ffffff;
   height: 1024px;
   position: relative;
@@ -18,26 +18,26 @@
   object-fit: cover;
 }
 .frame-54 {
-    background: #fff5fb;
-    border-radius: 10px;
-    padding: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: absolute;
-    left: 20px;
-    top: 20px;
-  }
-  .ilogo {
-    flex-shrink: 0;
-    width: 153px;
-    height: 55px;
-    position: relative;
-    object-fit: cover;
-  }
-.frame-55 {
+  background: #fff5fb;
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.ilogo {
+  flex-shrink: 0;
+  width: 153px;
+  height: 55px;
+  position: relative;
+  object-fit: cover;
+}
+.frame-29 {
   background: #fff5fb;
   border-radius: 16px;
   padding: 32px;
@@ -47,8 +47,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  left: calc(50% - 309px);
-  top: calc(50% - 438px);
+  left: calc(50% - 178px);
+  top: calc(50% - 272px);
   box-shadow: 2px 2px 30px 0px rgba(0, 189, 170, 0.25);
 }
 .frame-55 {
@@ -56,7 +56,7 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 12px;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
@@ -71,6 +71,14 @@
   flex-shrink: 0;
   position: relative;
 }
+.select-role {
+  color: #2e091f;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+}
 .frame-41 {
   border-radius: 6px;
   border-style: solid;
@@ -81,8 +89,25 @@
   height: 28px;
   position: relative;
 }
-
-.frame-56 {
+.keyboard-arrow-down {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 6px;
+  top: calc(50% - 12.22px);
+  overflow: visible;
+}
+.faculty {
+  color: #955c7e;
+  text-align: left;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: absolute;
+  left: 7px;
+  top: calc(50% - 10px);
+}
+.frame-58 {
   display: flex;
   flex-direction: column;
   gap: 42px;
@@ -100,7 +125,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.student-sign-up {
+.faculty-login, .student-login {
   color: #2e091f;
   text-align: left;
   font-family: "Poppins-Medium", sans-serif;
@@ -153,7 +178,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.usn {
+.faculty-id {
   color: #2e091f;
   text-align: left;
   font-family: "Poppins-Regular", sans-serif;
@@ -188,207 +213,23 @@
   font-weight: 400;
   position: relative;
 }
-.frame-26 {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.confirm-password {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.frame-42 {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-39 {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-30 {
-  display: flex;
-  flex-direction: row;
-  gap: 35px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.name {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.frame-272 {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.gender {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.frame-413 {
-  border-radius: 6px;
-  border-style: solid;
-  border-color: #955c7e;
-  border-width: 1px;
-  flex-shrink: 0;
-  width: 161px;
-  height: 36px;
-  position: relative;
-}
-.frame-37 {
-  display: flex;
-  flex-direction: row;
-  gap: 35px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.email-id {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.phone-no {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.frame-40 {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-382 {
-  display: flex;
-  flex-direction: row;
-  gap: 36px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.joining-year {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-.keyboard-arrow-down3 {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 6px;
-  top: calc(50% - 12.22px);
-  overflow: visible;
-}
-.dept-id {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-
-.frame-283 {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.subject-id {
-  color: #2e091f;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-}
-
-.frame-262 {
+.login {
   background: #8c4a6f;
   border-radius: 6px;
-  padding: 12px 32px 12px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-.sign-up {
+  padding: 12px 32px;
   color: #ffffff;
-  text-align: left;
   font-family: "Poppins-Medium", sans-serif;
   font-size: 20px;
   font-weight: 500;
-  position: relative;
+  border: none;
+  cursor: pointer;
 }
-.already-have-an-account-log-in {
-  color: #2e091f;
-  text-align: left;
-  font-family: "-", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
+
+.login:hover {
+  background: #6f3450;
 }
-.already-have-an-account-log-in-span {
-  color: #2e091f;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-}
-.already-have-an-account-log-in-span2 {
+
+.don-t-have-an-account-sign-up-span2 {
   color: #2e091f;
   font-family: "Poppins-Medium", sans-serif;
   font-size: 18px;
