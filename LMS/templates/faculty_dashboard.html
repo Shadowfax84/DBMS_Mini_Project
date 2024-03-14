@@ -21,7 +21,7 @@
         .Frame43 {
             width: 100%;
             height: 84px;
-            background: #FFF5FB;
+            background: #fcd7ed;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -129,7 +129,11 @@
             word-wrap: break-word;
         }
         .Frame47,
-        .Frame49 {
+        .Frame49,
+        .Frame48,
+        .Frame50,
+        .Frame52,
+        .Frame53 {
             /* Your existing styles */
             cursor: pointer; /* Change cursor to pointer on hover */
         }
@@ -137,7 +141,7 @@
             flex: 1; /* Take remaining space */
             width: auto;
             height: auto;
-            background-color:  white;
+            background-color: #fae2f0;
             font-display: flex;
             justify-content: center;
         }
@@ -229,13 +233,12 @@
             <div class="Frame45">
                 <div class="Frame46">
                     <div class="Frame47" onclick="showDetails()">Dashboard</div>
-                    <div class="Frame48">Courses</a></div>
+                    <div class="Frame48" onclick="loadCoursesPage()">Courses</a></div>
                     <div class="Frame49" onclick="showSchedule()">Schedule</div>
-                    <div class="Frame50">Grade</a></div>
-                    <div class="Frame52">Attendance</a></div>
-                    <div class="Frame53">Extra Curricular</div>
+                    <div class="Frame50" onclick="loadGradePage()">Grade</div>
+                    <div class="Frame52" onclick="loadAttendancePage()"  >Attendance</a></div>
                 </div>
-                <div class="Frame50">
+                <div class="Frame53" onclick="logout()">
                     <div class="Logout">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.7761 5 19 5.22386 19 5.5V18.5C19 18.7761 18.7761 19 18.5 19H5.5C5.22386 19 5 18.7761 5 18.5V5.5C5 5.22386 5.22386 5 5.5 5H18.5ZM11 8.79289L10.1046 9.68826L11.7929 11.3766H7V12.6234H11.7929L10.1046 14.3117L11 15.2071L14.2071 12L11 8.79289Z" fill="white"/>
@@ -245,14 +248,12 @@
                 </div>
             </div>
             <div class="dashboard">
-                <h1>Welcome, {{ faculty.Name }}!</h1>
                 <div class="user-details">
+                    <h1>Welcome, {{ faculty.Name }}!</h1><br><br>
                     {% include 'faculty_dashboardcards.html' %}
                 </div>
                 <div class="user-schedule" id="schedule-container">
-                    <!--<img class="schedule" src="{% static 'college_schedule.jpeg' %}" />-->
-                    <a href="{% url 'faculty_marks_list' %}">View Marks</a>
-                    <a href="{% url 'faculty_attendance_list' %}">View Attendance</a>
+                    <img class="schedule" src="{% static 'college_schedule.jpeg' %}" />
                 </div>
             </div>
         </div>
@@ -272,7 +273,24 @@
                 hideAll();
                 document.querySelector('.user-schedule').style.display = 'block';
             }
+
+            function loadGradePage() {
+                window.location.href = "{% url 'faculty_marks_list' %}";
+            }
         
+            function loadAttendancePage()
+            {
+                window.location.href = "{% url 'faculty_attendance_list' %}"
+            }
+
+            function loadCoursesPage() {
+                window.location.href = "{% url 'faculty_course' %}";
+            }
+
+            function logout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+
             // Initialize by hiding all sections except user-details
             hideAll();
             showDetails();

@@ -4,6 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            color: #FFFFFF; /* Text color */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #955C7E; /* Border color */
+        }
+        th {
+            background-color: #955C7E; /* Header background color */
+        }
+        tr:nth-child(even) {
+            background-color: #8C4A6F; /* Even row background color */
+        }
+        tr:nth-child(odd) {
+            background-color: #793D64; /* Odd row background color */
+        }
+        a {
+            color: #3498db; /* Link color */
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-back {
+            background-color: #1F0615; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 7px 17px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #955C7E; /* Button background color on hover */
+            color: #FFFFFF; /* Button text color on hover */
+        }
+    </style>
 </head>
 <body>
     <h1>Attendance List</h1>
@@ -14,7 +66,7 @@
                 <th>Subject ID</th>
                 <th>Date</th>
                 <th>Attendance Status</th>
-                <th>Edit</th> <!-- New column for Edit button -->
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -25,13 +77,15 @@
                 <td>{{ attendance.Subject_ID }}</td>
                 <td>{{ attendance.Date }}</td>
                 <td>{{ attendance.Attendance_status }}</td>
-                <!-- Edit button linking to edit view with mark id -->
-                <td><a href="{% url 'faculty_attendance_edit' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}">Edit</a></td>
-                <td><a href="{% url 'faculty_attendance_delete' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}">Delete</a></td>
+                <td><a href="{% url 'faculty_attendance_edit' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}"class="btn-back">Edit</a></td>
+                <td><a href="{% url 'faculty_attendance_delete' attendance.USN.Name attendance.Subject_ID.Subject_Name attendance.Date %}"class="btn-back">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'faculty_attendance_add' %}">Add Attendance</a>
+    <br><br>
+    <a href="{% url 'faculty_attendance_add' %}"class="btn-back">Add Attendance</a>
+    <br><br><br>
+    <a href="{% url 'faculty_dashboard' %}" class="btn-back" >Back to Dashboard</a>
 </body>
 </html>

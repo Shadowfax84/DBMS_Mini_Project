@@ -271,7 +271,6 @@ def student_courses(request):
     print(subject_ids)
 
     faculty_details = []
-    print(faculty_details)
 
     # Iterate over the subject IDs and query the Faculty table for each subject
     for subject_id in subject_ids:
@@ -291,6 +290,28 @@ def student_courses(request):
             })
 
     return render(request, 'student_courses.html', {'faculty_details': faculty_details})
+
+
+def faculty_course(request):
+    user = request.user.username
+    print(user)
+    faculty = Faculty.objects.get(Faculty_ID=user)
+    print(faculty)
+    subject_ids = faculty.Subject_ID.all()
+    print(subject_ids)
+
+    courses_details = []
+    for subject_id in subject_ids:
+        courses = Course.objects.filter(Subject_ID=subject_id.pk).first()
+        courses_details.append({
+            'subject_id': subject_id,
+            'subject_name': subject_id.Subject_Name,
+            'sem': courses.Sem,
+            'dept_id': courses.Dept_ID,
+            'dept_name': courses.Dept_ID.Dept_Name
+        })
+
+    return render(request, 'faculty_course.html', {'courses_details': courses_details})
 
 
 def student_attendance(request):

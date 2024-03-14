@@ -4,48 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Mark</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            margin: 0;
+            padding: 20px;
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center align text */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #FFFFFF; /* Heading text color */
+        }
+        form {
+            text-align: left; /* Align form elements to the left */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #FFFFFF; /* Label text color */
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .form-row > div {
+            width: calc(33.33% - 10px);
+        }
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #955C7E; /* Input border color */
+            background-color: #8C4A6F; /* Input background color */
+            color: #FFFFFF; /* Input text color */
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+        .btn-back {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+    </style>
 </head>
 <body>
     <h1>Add Mark</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="usn">USN:</label>
-        <select name="usn" id="usn">
-            {% for usn in usns %}
-                <option value="{{ usn }}">{{ usn }}</option>
-            {% endfor %}
-        </select><br>
+        <div class="form-row">
+            <div>
+                <label for="usn">USN:</label>
+                <select name="usn" id="usn">
+                    {% for usn in usns %}
+                        <option value="{{ usn }}">{{ usn }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="subject_id">Subject ID:</label>
+                <select name="subject_id" id="subject_id">
+                    {% for subject_id in subject_ids %}
+                        <option value="{{ subject_id }}">{{ subject_id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="sem">Semester:</label>
+                <input type="number" id="sem" name="sem" required>
+            </div>
+        </div>
 
-        <label for="subject_id">Subject ID:</label>
-        <select name="subject_id" id="subject_id">
-            {% for subject_id in subject_ids %}
-                <option value="{{ subject_id }}">{{ subject_id }}</option>
-            {% endfor %}
-        </select><br>
+        <div class="form-row">
+            <div>
+                <label for="internal_marks">Internal Marks:</label>
+                <input type="number" id="internal_marks" name="internal_marks" required>
+            </div>
+            <div>
+                <label for="assignment_marks">Assignment Marks:</label>
+                <input type="number" id="assignment_marks" name="assignment_marks" required>
+            </div>
+            <div>
+                <label for="seminar_marks">Seminar Marks:</label>
+                <input type="number" id="seminar_marks" name="seminar_marks" required>
+            </div>
+        </div>
 
-        <label for="sem">Semester:</label>
-        <input type="number" id="sem" name="sem" required><br>
-        
+        <div class="form-row">
+            <div>
+                <label for="external_marks">External Marks:</label>
+                <input type="number" id="external_marks" name="external_marks" required>
+            </div>
+            <div>
+                <label for="final_marks">Final Marks:</label>
+                <input type="number" id="final_marks" name="final_marks" required>
+            </div>
+            <div>
+                <label for="performance">Performance:</label>
+                <input type="number" id="performance" name="performance">
+            </div>
+        </div>
 
-        <label for="internal_marks">Internal Marks:</label>
-        <input type="number" id="internal_marks" name="internal_marks" required><br>
-
-        <label for="assignment_marks">Assignment Marks:</label>
-        <input type="number" id="assignment_marks" name="assignment_marks" required><br>
-
-        <label for="seminar_marks">Seminar Marks:</label>
-        <input type="number" id="seminar_marks" name="seminar_marks" required><br>
-
-        <label for="external_marks">External Marks:</label>
-        <input type="number" id="external_marks" name="external_marks" required><br>
-
-        <label for="final_marks">Final Marks:</label>
-        <input type="number" id="final_marks" name="final_marks" required><br>
-
-        <label for="performance">Performance:</label>
-        <input type="number" id="performance" name="performance"><br>
-
-        <input type="submit" value="Submit" class="Submit">
+        <input type="submit" value="Submit">
     </form>
+    <br>
+    <a href="{% url 'faculty_dashboard' %}" class="btn-back">Back to Dashboard</a> <!-- Back button -->
 </body>
 </html>

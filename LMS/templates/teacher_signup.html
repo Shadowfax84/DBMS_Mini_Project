@@ -1,113 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>teacher Signup</title>
+        {% load static %}
+        <style>
+            .desktop-35,
+            .desktop-35 * {
+                box-sizing: border-box;
+            }
+            .desktop-35 {
+                background: #ffffff;
+                height: auto;
+                position: relative;
+                overflow: hidden;
+            }
+            .commonbg {
+                width: 100%; /* Adjusted */
+                max-height: 100%; /* Adjusted */
+                position: absolute;
+                top: 0; /* Adjusted */
+                left: 0; /* Adjusted */
+                filter: blur(1px);
+                object-fit: cover;
+            }
+            .frame-54 {
+                background: #fff5fb;
+                border-radius: 10px;
+                padding: 4px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                position: absolute;
+                left: 20px;
+                top: 20px;
+            }
+            .ilogo {
+                width: 100%; /* Adjusted */
+                height: auto; /* Adjusted */
+                max-width: 153px; /* Adjusted */
+                max-height: 55px; /* Adjusted */
+                object-fit: cover;
+            }
+            .frame-55 {
+                background: #fff5fb;
+                border-radius: 16px;
+                padding: 32px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                margin: 20px auto; /* Adjusted */
+                max-width: 800px; /* Adjusted */
+            }
+            .frame-552 {
+                border-radius: 10px;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                gap: 50px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-28 {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <title>teacher Signup </title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'teachersignup.css' %}">
-</head>
+            .frame-41 {
+                border-radius: 6px;
+                border-style: solid;
+                border-color: #955c7e;
+                border-width: 1px;
+                flex-shrink: 0;
+                width: 104px;
+                height: 28px;
+                position: relative;
+            }
 
-<body>
-    <form method="POST">
-        {% csrf_token %} 
-    <div class="desktop-35">
-        <img class="commonbg" src="{% static 'commonbg.png' %}" />
-        <div class="frame-54">
-            <img class="ilogo" src="{% static 'ilogo.png' %}" />
-        </div>
-        <div class="frame-55">
-            <div class="frame-57">
-                <div class="frame-27">
-                    <div class="faculty-sign-up">Faculty Sign Up</div>
+            .faculty {
+                color: #955c7e;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                position: absolute;
+                left: 7px;
+                top: calc(50% - 10px);
+            }
+            .frame-57 {
+                display: flex;
+                flex-direction: column;
+                gap: 42px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-27 {
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .faculty-sign-up {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Medium", sans-serif;
+                font-size: 38px;
+                font-weight: 500;
+                position: relative;
+            }
+            .frame-282 {
+                display: flex;
+                flex-direction: column;
+                gap: 44px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-18 {
+                display: flex;
+                flex-direction: column;
+                gap: 54px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-38 {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-35 {
+                display: flex;
+                flex-direction: row;
+                gap: 35px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-24 {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .faculty-id {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-412 {
+                border-radius: 6px;
+                border-style: solid;
+                border-color: #955c7e;
+                border-width: 1px;
+                flex-shrink: 0;
+                width: 260px;
+                height: 36px;
+                position: relative;
+            }
+            .frame-36 {
+                display: flex;
+                flex-direction: row;
+                gap: 35px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .password {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-26 {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .confirm-password {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-42 {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-39 {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-30 {
+                display: flex;
+                flex-direction: row;
+                gap: 35px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .name {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-272 {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .qualifications {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-413 {
+                border-radius: 6px;
+                border-style: solid;
+                border-color: #955c7e;
+                border-width: 1px;
+                flex-shrink: 0;
+                width: 161px;
+                height: 36px;
+                position: relative;
+            }
+            .keyboard-arrow-down2 {
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                right: 6px;
+                top: calc(50% - 12.22px);
+                overflow: visible;
+            }
+            .frame-37 {
+                display: flex;
+                flex-direction: row;
+                gap: 35px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .email-id {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .phone-no {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+            .frame-40 {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .frame-382 {
+                display: flex;
+                flex-direction: row;
+                gap: 36px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .papers-published {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+
+            .dept-id {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+
+            .frame-283 {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .subject-id {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+
+            .frame-262 {
+                background: #8c4a6f;
+                border-radius: 6px;
+                padding: 12px 32px 12px 32px;
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+                overflow: hidden;
+                margin-top: 20px; /* Adjusted */
+            }
+            .sign_up {
+                color: #ffffff;
+                text-align: center; /* Adjusted */
+                font-family: "Poppins-Medium", sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+                position: relative;
+                cursor: pointer; /* Added */
+                background-color: #8c4a6f; /* Added */
+                border: none; /* Added */
+                border-radius: 6px; /* Added */
+                padding: 10px 20px; /* Added */
+                transition: background-color 0.3s; /* Added */
+            }
+            .sign_up:hover {
+                background-color: #7b3c61; /* Added */
+            }
+            .dept-id {
+                color: #2e091f;
+                text-align: left;
+                font-family: "Poppins-Regular", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                position: relative;
+            }
+
+            .text-center {
+                font-family: Poppins-Regular, sans-serif;
+                color: #2e091f;
+                text-align: center; /* Adjusted */
+                margin-top: 20px; /* Adjusted */
+            }
+        </style>
+    </head>
+
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="desktop-35">
+                <img class="commonbg" src="{% static 'commonbg.png' %}" />
+                <div class="frame-54">
+                    <img class="ilogo" src="{% static 'ilogo.png' %}" />
                 </div>
-                <div class="frame-282">
-                    <div class="frame-18">
-                        <div class="frame-38">
-                            <div class="frame-35">
-                                <div class="frame-24">
-                                    <div class="faculty-id">Faculty ID:</div>
-                                    <input type="text" class="frame-412" placeholder="Enter Faculty ID" name="faculty_id" />
-                                </div>
-                            </div>
-                            <div class="frame-36">
-                                <div class="frame-24">
-                                    <div class="password">Password:</div>
-                                    <input type="password" class="frame-412" placeholder="Enter Password" name="password"/>
-                                </div>
-                                <div class="frame-26">
-                                    <div class="confirm-password">Confirm Password:</div>
-                                    <input type="password" class="frame-412" placeholder="Enter Password"  name="confirm_password" />
-                                </div>
-                            </div>
+                <div class="frame-55">
+                    <div class="frame-57">
+                        <div class="frame-27">
+                            <div class="faculty-sign-up">Faculty Sign Up</div>
                         </div>
-                        <div class="frame-42">
-                            <div class="frame-39">
-                                <div class="frame-30">
+                        <div class="frame-282">
+                            <div class="frame-18">
+                                <div class="frame-38">
+                                    <div class="frame-35">
+                                        <div class="frame-24">
+                                            <div class="faculty-id">Faculty ID:</div>
+                                            <input type="text" class="frame-412" placeholder="Enter Faculty ID" name="faculty_id" />
+                                        </div>
+                                    </div>
+                                    <div class="frame-36">
+                                        <div class="frame-24">
+                                            <div class="password">Password:</div>
+                                            <input type="password" class="frame-412" placeholder="Enter Password" name="password" />
+                                        </div>
+                                        <div class="frame-26">
+                                            <div class="confirm-password">Confirm Password:</div>
+                                            <input type="password" class="frame-412" placeholder="Enter Password" name="confirm_password" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frame-42">
+                                    <div class="frame-39">
+                                        <div class="frame-30">
+                                            <div class="frame-24">
+                                                <div class="name">Name:</div>
+                                                <input type="text" class="frame-412" placeholder="Name" name="name" />
+                                            </div>
+                                            <div class="frame-272">
+                                                <div class="qualifications">Qualifications:</div>
+                                                <select class="frame-413" name="Qualifications">
+                                                    <option value="phd">PHD</option>
+                                                    <option value="btech">B.Tech</option>
+                                                    <option value="mtech">M.Tech</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-37">
+                                        <div class="frame-24">
+                                            <div class="email-id">Email ID:</div>
+                                            <input type="email" class="frame-412" placeholder="Enter Email ID" name="email" />
+                                        </div>
+                                        <div class="frame-26">
+                                            <div class="phone-no">Phone No:</div>
+                                            <input type="number" class="frame-412" placeholder="Enter Phone" name="phone_no" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frame-40">
+                                <div class="frame-382">
                                     <div class="frame-24">
-                                        <div class="name">Name:</div>
-                                        <input type="text" class="frame-412" placeholder="Name" name="name"/>
+                                        <div class="papers-published">Papers Published:</div>
+                                        <input type="text" class="frame-413" placeholder="Enter Faculty ID" name="papers_published" />
                                     </div>
                                     <div class="frame-272">
-                                        <div class="qualifications">Qualifications:</div>                                 
-                                         <select class="frame-413" name="Qualifications">
-                                         <option value="phd">PHD</option>
-                                         <option value="btech">B.Tech</option>
-                                         <option value="mtech">M.Tech</option>
-                                         <option value="other">Other</option>
-                                     </select>
+                                        <div class="dept-id">Dept ID:</div>
+                                        <select name="dept_id" class="frame-413">
+                                            {% for dept in departments %}
+                                            <option value="{{ dept.Dept_ID }}">{{ dept.Dept_Name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="frame-283">
+                                        <div class="subject-id">Subject ID:</div>
+                                        <select name="subjects" class="frame-412" multiple>
+                                            {% for course in courses %}
+                                            <option value="{{ course.Subject_ID }}">{{ course.Subject_Name }}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="frame-37">
-                                <div class="frame-24">
-                                    <div class="email-id">Email ID:</div>
-                                    <input type="email" class="frame-412" placeholder="Enter Email ID" name="email"/>
-                                </div>
-                                <div class="frame-26">
-                                    <div class="phone-no">Phone No:</div>
-                                    <input type="number" class="frame-412" placeholder="Enter Phone" name="phone_no" />
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="frame-40">
-                        <div class="frame-382">
-                            <div class="frame-24">
-                                <div class="papers-published">Papers Published:</div>
-                                <input type="text" class="frame-413" placeholder="Enter Faculty ID" name="papers_published" />
-                            </div>
-                            <div class="frame-272">
-                                <div class="dept-id">Dept ID:</div>
-                                <select name="dept_id" class="frame-413">
-                                    {% for dept in departments %}
-                                        <option value="{{ dept.Dept_ID }}">{{ dept.Dept_Name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>                       
-                            <div class="frame-283">
-                                <div class="subject-id">Subject ID:</div>
-                                <select name="subjects" class="frame-412" multiple>
-                                    {% for course in courses %}
-                                        <option value="{{ course.Subject_ID }}">{{ course.Subject_Name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            </div>
-                            </div>
-                        </div>                        
-                    <div class="frame-262">
-                        <button type="submit" class="sign_up" name="submit">Signup</button>
-                    </div>
+                        <div class="frame-262">
+                            <button type="submit" class="sign_up" name="submit">Signup</button>
+                        </div>
                     </div>
                     <div class="text-center">Already have an account? <a href="/login-page/">Login here</a></div>
                 </div>
             </div>
-        
-    
-    
-    </form>
-</body>
-
+        </form>
+    </body>
 </html>
-

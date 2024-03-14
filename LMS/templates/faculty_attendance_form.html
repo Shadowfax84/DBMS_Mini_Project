@@ -4,6 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            margin: 0;
+            padding: 20px;
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center align text */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: left; /* Align form elements to the left */
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select,
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #955C7E; /* Input border color */
+            background-color: #8C4A6F; /* Input background color */
+            color: #FFFFFF; /* Input text color */
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px; /* Input font size */
+        }
+        .Submit {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .Submit:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+        .btn-back {
+            background-color: #1F0615; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+    </style>
 </head>
 <body>
     <h1>Add Attendance</h1>
@@ -34,6 +96,8 @@
         </select><br>
 
         <input type="submit" value="Submit" class="Submit">
+        <br><br><br>
+        <a href="{% url 'faculty_dashboard' %}" class="btn-back" >Back to Dashboard</a>
     </form>
 </body>
 </html>

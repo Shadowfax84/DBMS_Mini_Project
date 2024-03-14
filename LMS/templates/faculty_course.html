@@ -2,23 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Courses</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #1F0615; /* Background color */
+            padding-top: 50px;
+            color: #FFFFFF; /* Text color */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border-radius: 5px;
+            box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            border: none;
+            margin-bottom: 30px;
+            transition: all 0.3s ease-in-out;
+            background-color: #8C4A6F; /* Card background color */
+        }
+
+        .card .card-block {
+            padding: 25px;
+        }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-green {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        .bg-c-pink {
+            background: linear-gradient(45deg, #FF5370, #597481);
+        }
+
+        /* Text color and font */
+        .card p,
+        .card h6 {
+            color: #FFFFFF;
+            font-family: Arial, sans-serif; /* Specify your preferred font */
+        }
+
+        /* Back button style */
+        .btn-back {
+            background-color: #1F0615; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-back:hover {
+            background-color: #955C7E; /* Button background color on hover */
+            color: #FFFFFF; /* Button text color on hover */
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Faculty Courses</h1>
-
-    {% if courses %}
-        <ul>
-            {% for course in courses %}
-                <li>{{ course.Subject_ID }} - {{ course.Subject_Name }}</li>
+    <div class="container">
+        <h1 class="text-center mb-4">Courses</h1>
+        <div class="row">
+            {% for courses_detail in courses_details %}
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Subject ID</h6>
+                        <h2 class="text-right"><i class="fas fa-user-tie f-left"></i></h2>
+                        <p><span style="font-size: 20px;">{{ courses_detail.subject_id }}</span></p>
+                        <h6 class="m-b-20">Subject Name</h6>
+                        <p><span style="font-size: 20px;">{{ courses_detail.subject_name }}</span></p>
+                        <h6 class="m-b-20">Sem</h6>
+                        <p><span style="font-size: 20px;">{{ courses_detail.sem }}</span></p>
+                        <h6 class="m-b-20">Dept ID</h6>
+                        <p><span style="font-size: 20px;">{{ courses_detail.dept_id }}</span></p>
+                        <h6 class="m-b-20">Dept Name</h6>
+                        <p><span style="font-size: 20px;">{{ courses_detail.dept_name }}</span></p>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No courses available for the selected department.</p>
-    {% endif %}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/faculty-dashboard/" class="btn btn-back">Back to Dashboard</a>
+    </div>    
 </body>
 
 </html>

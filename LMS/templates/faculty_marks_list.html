@@ -4,10 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marks List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            margin: 0;
+            padding: 20px;
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center align text */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #FFFFFF; /* Heading text color */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #955C7E; /* Border color */
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1F0615; /* Header background color */
+            color: #FFFFFF; /* Header text color */
+        }
+        tr:nth-child(even) {
+            background-color: #8C4A6F; /* Even row background color */
+        }
+        tr:hover {
+            background-color: #955C7E; /* Hovered row background color */
+        }
+        a {
+            color: #FFFFFF; /* Link color */
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        a:hover {
+            color: #FFF5FB; /* Hovered link color */
+        }
+        .add-button {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px; /* Add some bottom margin */
+        }
+        .add-button:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+        .btn-back {
+            background-color: #1F0615; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #955C7E; /* Button background color on hover */
+            color: #FFFFFF; /* Button text color on hover */
+        }
+    </style>
 </head>
 <body>
     <h1>Marks List</h1>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>USN</th>
@@ -19,7 +87,7 @@
                 <th>External Marks</th>
                 <th>Final Marks</th>
                 <th>Performance</th>
-                <th>Edit</th> <!-- New column for Edit button -->
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -35,13 +103,14 @@
                 <td>{{ mark.External_Marks }}</td>
                 <td>{{ mark.Final_Marks }}</td>
                 <td>{{ mark.Performance }}</td>
-                <!-- Edit button linking to edit view with mark id -->
-                <td><a href="{% url 'faculty_marks_edit' mark.Subject_ID.Subject_Name %}">Edit</a></td> 
-                <td><a href="{% url 'faculty_marks_delete' mark.Subject_ID.Subject_Name %}">Delete</a></td>
+                <td><a href="{% url 'faculty_marks_edit' mark.Subject_ID.Subject_Name %}"class="btn-back">Edit</a></td> 
+                <td><a href="{% url 'faculty_marks_delete' mark.Subject_ID.Subject_Name %}"class="btn-back">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'faculty_marks_add' %}">Add Mark</a>
+    <a href="{% url 'faculty_marks_add' %}" class="add-button">Add Mark</a>
+    <br>
+    <a href="{% url 'faculty_dashboard' %}" class="btn-back">Back to Dashboard</a> <!-- Back button -->
 </body>
 </html>

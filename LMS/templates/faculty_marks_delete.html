@@ -2,16 +2,64 @@
 <html>
 <head>
     <title>Delete Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF; /* Text color */
+            text-align: center;
+        }
+        h1 {
+            color: #FFFFFF; /* Heading text color */
+            margin-bottom: 20px;
+        }
+        p {
+            color: #FFFFFF; /* Paragraph text color */
+            margin-bottom: 20px;
+        }
+        form {
+            display: inline-block;
+        }
+        button[type="submit"] {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+        a {
+            color: #3498db; /* Link color */
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Delete Marks</h1>
-    <p>Are you sure you want to delete the marks for {{ mark.USN }} - {{ mark.Subject_ID }}?</p>
-    
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirm Delete</button>
-    </form>
+    <div class="container">
+        <h1>Delete Marks</h1>
+        <p>Are you sure you want to delete the marks for {{ mark.USN }} - {{ mark.Subject_ID }}?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Delete</button>
+        </form>
 
-    <a href="{% url 'faculty_marks_list' %}">Cancel</a>
+        <a href="{% url 'faculty_marks_list' %}">Cancel</a>
+    </div>
 </body>
 </html>
