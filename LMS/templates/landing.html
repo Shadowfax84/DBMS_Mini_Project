@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <title>Welcome to Your LMS</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'landing.css' %}">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
             background-image: url('{% static "bglanding.jpg" %}');
-            background-size: 100% ;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            color: #fff;
             height: 100vh; /* Ensure the body takes the full viewport height */
             display: flex;
             flex-direction: column;
@@ -23,13 +21,24 @@
             text-align: center;
         }
 
-        h1, p, ul, li, a {
-            color: #fff;
+        .container {
+            background-color: #694081;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
+        h2 {
             margin-top: 20px;
             margin-bottom: 20px;
+            font-size: 36px;
+            color: #fff; /* Adjusted text color */
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #fff; /* Adjusted text color */
         }
 
         ul {
@@ -40,26 +49,37 @@
 
         li {
             margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .signup-option {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #e3d2e4;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-option:hover {
+            background-color: #207cca;
         }
 
         a {
             text-decoration: none;
-            color: #3498db;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #207cca;
+            font-weight: bold;
         }
     </style>
 </head>
-<div>
-    <h2>Welcome To Your Learning Management System</h2>
-    <p>SIGN UP AS:</p>
-    <ul>
-        <li><a href="{% url 'student_signup' %}">Student</a></li>
-        <li><a href="{% url 'teacher_signup' %}">Teacher</a></li>
-    </ul>
-    <p>Already have an account? <a href="{% url 'login_page' %}">Login</a></p>
-</div>
+<body>
+    <div class="container">
+        <h2>Discover a World of Learning with IMPACT LMS</h2>
+        <p>Sign up as:</p>
+        <ul>
+            <li><a href="{% url 'student_signup' %}" class="signup-option"style="color: #532b7f;">Student</a></li> <!-- Adjusted text color -->
+            <li><a href="{% url 'teacher_signup' %}" class="signup-option"style="color: #532b7f;">Teacher</a></li> <!-- Adjusted text color -->
+        </ul>
+        <p>Already have an account? <a href="{% url 'login_page' %}" style="color: #fff;">Login</a></p> <!-- Adjusted text color -->
+    </div>
+</body>
 </html>

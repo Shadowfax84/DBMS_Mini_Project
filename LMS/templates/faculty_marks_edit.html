@@ -4,38 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F0615; /* Background color */
+            margin: 0;
+            padding: 20px;
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center align text */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #FFFFFF; /* Heading text color */
+        }
+        form {
+            text-align: left; /* Align form elements to the left */
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #FFFFFF; /* Label text color */
+            width: 100%;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: calc(50% - 10px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #955C7E; /* Input border color */
+            background-color: #8C4A6F; /* Input background color */
+            color: #FFFFFF; /* Input text color */
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        button[type="submit"] {
+            background-color: #955C7E; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button[type="submit"]:hover {
+            background-color: #a10563; /* Hovered button background color */
+        }
+    </style>
 </head>
 <body>
     <h1>Edit Marks</h1>
     <form method="post">
         {% csrf_token %}
         
-        <label for="USN">USN:</label>
-        <input type="text" id="USN" name="USN" value="{{ marks.USN.USN }}" readonly><br>
+        <div>
+            <label for="USN">USN:</label>
+            <input type="text" id="USN" name="USN" value="{{ marks.USN.USN }}" readonly>
+        </div>
         
-        <label for="Subject_ID">Subject ID:</label>
-        <input type="text" id="Subject_ID" name="Subject_ID" value="{{ marks.Subject_ID.Subject_Name }}" readonly><br>
+        <div>
+            <label for="Subject_ID">Subject ID:</label>
+            <input type="text" id="Subject_ID" name="Subject_ID" value="{{ marks.Subject_ID.Subject_Name }}" readonly>
+        </div>
         
-        <label for="Sem">Semester:</label>
-        <input type="text" id="Sem" name="Sem" value="{{ marks.Sem }}" readonly><br>
+        <div>
+            <label for="Sem">Semester:</label>
+            <input type="text" id="Sem" name="Sem" value="{{ marks.Sem }}" readonly>
+        </div>
 
-        <label for="Internal_Marks">Internal Marks:</label>
-        <input type="number" id="Internal_Marks" name="Internal_Marks" value="{{ marks.Internal_Marks }}"><br>
+        <div>
+            <label for="Internal_Marks">Internal Marks:</label>
+            <input type="number" id="Internal_Marks" name="Internal_Marks" value="{{ marks.Internal_Marks }}">
+        </div>
         
-        <label for="Assignment_Marks">Assignment Marks:</label>
-        <input type="number" id="Assignment_Marks" name="Assignment_Marks" value="{{ marks.Assignment_Marks }}"><br>
+        <div>
+            <label for="Assignment_Marks">Assignment Marks:</label>
+            <input type="number" id="Assignment_Marks" name="Assignment_Marks" value="{{ marks.Assignment_Marks }}">
+        </div>
         
-        <label for="Seminar_Marks">Seminar Marks:</label>
-        <input type="number" id="Seminar_Marks" name="Seminar_Marks" value="{{ marks.Seminar_Marks }}"><br>
+        <div>
+            <label for="Seminar_Marks">Seminar Marks:</label>
+            <input type="number" id="Seminar_Marks" name="Seminar_Marks" value="{{ marks.Seminar_Marks }}">
+        </div>
         
-        <label for="External_Marks">External Marks:</label>
-        <input type="number" id="External_Marks" name="External_Marks" value="{{ marks.External_Marks }}"><br>
+        <div>
+            <label for="External_Marks">External Marks:</label>
+            <input type="number" id="External_Marks" name="External_Marks" value="{{ marks.External_Marks }}">
+        </div>
         
-        <label for="Final_Marks">Final Marks:</label>
-        <input type="number" id="Final_Marks" name="Final_Marks" value="{{ marks.Final_Marks }}"><br>
+        <div>
+            <label for="Final_Marks">Final Marks:</label>
+            <input type="number" id="Final_Marks" name="Final_Marks" value="{{ marks.Final_Marks }}">
+        </div>
         
-        <label for="Performance">Performance:</label>
-        <input type="number" id="Performance" name="Performance" value="{{ marks.Performance }}"><br>
+        <div>
+            <label for="Performance">Performance:</label>
+            <input type="number" id="Performance" name="Performance" value="{{ marks.Performance }}">
+        </div>
         
         <button type="submit">Save Changes</button>
     </form>
