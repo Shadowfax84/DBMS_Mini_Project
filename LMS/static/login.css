@@ -17,6 +17,9 @@ form {
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
+    background-image: url('path/to/your/image.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-position: center; /* Adjust the background position as needed */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
