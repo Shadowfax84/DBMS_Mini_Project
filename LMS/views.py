@@ -1,3 +1,7 @@
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
+from collections import defaultdict
+import json
 from .models import Attendance
 from django.shortcuts import render, get_object_or_404, redirect
 import matplotlib.pyplot as plt
@@ -21,10 +25,6 @@ matplotlib.use('Agg')
 
 def landing_page(request):
     return render(request, 'landing.html')
-
-
-def home(request):
-    return render(request, 'home.html')
 
 
 def student_signup(request):
@@ -141,15 +141,11 @@ def student_login(request):
     if request.method == 'POST':
         usn = request.POST.get('usn')
         password = request.POST.get('password')
-        print(usn, password)
 
         # Authenticate the user
         user = authenticate(request, username=usn, password=password)
-        print("good")
         if user is not None:
-            print("ifin")
             login(request, user)
-            print("loggedin")
             # Create a new LoginHistory record for the logged-in user
             LoginHistory.objects.create(
                 user=user, login_timestamp=datetime.now())
@@ -157,7 +153,6 @@ def student_login(request):
         else:
             # Authentication failed
             return render(request, 'student_login.html', {'error_message': 'Invalid USN or password'})
-    print("test1")
 
     return render(request, 'student_login.html')
 
@@ -167,7 +162,6 @@ def teacher_login(request):
         # Retrieve data from the form
         faculty_id = request.POST.get('username')
         password = request.POST.get('password')
-        print(faculty_id, password)
 
         # Check if the credentials are valid
         user = authenticate(username=faculty_id, password=password)
@@ -206,9 +200,8 @@ def logout_view(request):
 
 def student_dashboard(request):
     student_id = request.user.username  # Assuming username is USN
-    print(student_id)
+
     student = get_object_or_404(Student, USN=student_id)
-    print(student)
 
     sem = request.session.get('sem')  # Assuming you store semester in session
 
@@ -262,13 +255,10 @@ def faculty_dashboard(request):
 def student_courses(request):
     # Assuming 'usn' is passed as a query parameter or retrieved from the session
     user = request.user.username
-    print(user)
 
     student = Student.objects.get(USN=user)
-    print(student)
+
     subject_ids = student.Subject_ID.all()
-    print("hello")
-    print(subject_ids)
 
     faculty_details = []
 
@@ -294,11 +284,10 @@ def student_courses(request):
 
 def faculty_course(request):
     user = request.user.username
-    print(user)
+
     faculty = Faculty.objects.get(Faculty_ID=user)
-    print(faculty)
+
     subject_ids = faculty.Subject_ID.all()
-    print(subject_ids)
 
     courses_details = []
     for subject_id in subject_ids:
@@ -501,3 +490,31 @@ def attendance_delete(request, usn_name, subject_name, date):
         return redirect('faculty_attendance_list')
 
     return render(request, 'faculty_attendance_delete.html', {'attendance': attendance})
+
+
+def student_marks(request):
+    usn = request.user.username
+    student_marks = Marks.objects.filter(USN=usn)
+    semesters = student_marks.values_list(
+        'Sem', flat=True).distinct().order_by('Sem')
+
+    marks_data = defaultdict(list)
+    for mark in student_marks:
+        marks_data[mark.Sem].append(mark.Final_Marks)
+
+    # Ensure each semester has data, if not, set default value as 0
+    for semester in semesters:
+        if semester not in marks_data:
+            marks_data[semester] = [0]
+
+    context = {
+        'semesters': list(semesters),
+        # Take only the first mark for each semester
+        'marks_data': [marks_data[semester][0] for semester in semesters],
+    }
+
+    # Convert data to JSON and mark it as safe for rendering in the template
+    context['semesters_json'] = mark_safe(json.dumps(context['semesters']))
+    context['marks_data_json'] = mark_safe(json.dumps(context['marks_data']))
+
+    return render(request, 'student_marks.html', context)

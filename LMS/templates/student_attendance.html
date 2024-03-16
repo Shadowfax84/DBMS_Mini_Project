@@ -8,14 +8,19 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #1F0615;
+            margin: 0;
+            padding: 0;
         }
 
         h1 {
             margin-bottom: 20px;
+            color: #ffffff;
         }
 
         h2 {
             margin-top: 30px;
+            color: #ffffff;
         }
 
         .chart-container {
@@ -28,6 +33,33 @@
 
         .chart-item {
             margin: 10px; /* Adjust spacing between charts */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-item h3 {
+            margin-bottom: 10px;
+            color: #353333;
+        }
+
+        .chart-item img {
+            width: 500px;
+            height: auto;
+        }
+        .btn-back {
+            background-color: #1F0615; /* Button background color */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #955C7E; /* Button background color on hover */
+            color: #FFFFFF; /* Button text color on hover */
         }
     </style>
 </head>
@@ -51,7 +83,9 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <a href="/student-dashboard/" class="btn btn-back">Back to Dashboard</a>
     </div>
 
 </body>
+
 </html>

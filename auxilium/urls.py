@@ -40,6 +40,7 @@ urlpatterns = [
          views.marks_edit, name='faculty_marks_edit'),
     path('faculty-marks-delete/<str:Subject_Name>/',
          views.marks_delete, name='faculty_marks_delete'),
+    path('student-marks/', views.student_marks, name='student_marks'),
     path('faculty-attendance-list', views.attendance_list,
          name='faculty_attendance_list'),
     path('faculty-attendance-add', views.attendance_add,
@@ -48,5 +49,4 @@ urlpatterns = [
          views.attendance_edit, name='faculty_attendance_edit'),
     path('faculty-attendance-delete/<str:usn_name>/<str:subject_name>/<str:date>/',
          views.attendance_delete, name='faculty_attendance_delete'),
-    path('home/', views.home, name='home'),
 ]
