@@ -1,10 +1,14 @@
-login pages:
-    logo or college pic in bg with solid colour overlay
-    and basic login form with saperate login for student and staff
-
-    CONFORM password
-    USER_ID = USN
-
-detele and edit for teacher
-Extra circular 
-Schedule 
+Round the coners of the logo
+button aligment: login pages
+dashboard logo width same as menu bar
+aligne the dashboard
+backgroung colour of courses
+colour and feel consistance
+navigation bar accross all pages should remain same
+Cache the logged in user data for faster loading
+logo take u to home page 
+SVG format attandance chart and drop down to filter subject 
+Logout popup for conformation of login
+dashboard card size same and subject name containers
+Add marks prompt for edit and detele change colour of page 
+landing page looks(padding)
