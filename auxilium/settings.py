@@ -77,13 +77,13 @@ WSGI_APPLICATION = "auxilium.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        'HOST': 'localhost',
-        'PORT': 3306,
-        'USER': 'Mantis',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'lms_db',
+        'USER': 'postgres',
         'PASSWORD': '1475963',
-        'NAME': 'LMS_db',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
