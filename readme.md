@@ -6,7 +6,7 @@ Create a virtual environment for the project:
     python -m venv auxilium_env
 
 Activate the virtual environment:
-    cd C:\py_envs\auxilium_env
+    cd C:\________\auxilium_env
     Scripts\activate
 
 install the requirements:
@@ -24,7 +24,7 @@ create a new app:
 
 To create a new database and user for the project:
     CREATE DATABASE LMS_db;
-    CREATE USER 'Mantis'@'localhost' IDENTIFIED BY '1475963';
+    CREATE USER 'Mantis'@'localhost' IDENTIFIED BY '*******';
     GRANT ALL PRIVILEGES ON LMS_db.* TO 'Mantis'@'localhost';
     FLUSH PRIVILEGES;
 
@@ -35,7 +35,7 @@ In Django settings update the database settings:
         'HOST': 'localhost',
         'PORT': 3306,
         'USER': 'Mantis',
-        'PASSWORD': '1475963',
+        'PASSWORD': '************',
         'NAME': 'LMS_db',
     }
 }
