@@ -1,3 +1,7 @@
+<h1> Student Management System </h1>
+
+This Student Management System (SMS) is a web application developed as part of my engineering course for the Database Management Systems (DBMS) subject. The system provides a user-friendly interface for both students and teachers, allowing them to manage and access important academic information, including courses, attendance, and marks.
+
 Create a virtual environment for the project:
     python -m venv auxilium_env
 
